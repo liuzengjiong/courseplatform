@@ -1,7 +1,7 @@
 package com.courseplatform.handler;
 /**
 *@author ye
-*@dete 2016Äê12ÔÂ6ÈÕ ÏÂÎç1:36:51
+*@dete 2016å¹´12æœˆ6æ—¥1:36:51
 */
 public class LoginHandler {
 	public void login(){

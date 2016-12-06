@@ -1,7 +1,7 @@
 package com.courseplatform.app;
 /**
 *@author ye
-*@dete 2016Äê12ÔÂ6ÈÕ ÏÂÎç1:24:13
+*@dete 2016å¹´12æœˆ6æ—¥ 11:24:13
 */
 public class App {
 
