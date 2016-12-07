@@ -7,7 +7,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<bean class="com.weChaty.robot.util.MySwaggerConfig" id="mySwaggerConfig" />
 	<!-- 静态资源访问 -->
 	<!-- <mvc:resources location="/js/" mapping="/js/**" /> -->
 	<!-- 启动注解 -->
