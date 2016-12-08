@@ -58,4 +58,6 @@
     <!--<property name="basePackage" value="com.courseplatform.bean" />-->
     <!--</bean>-->
 
+    <import resource="classpath:/spring-mvc.xml"/>
+
 </beans> 

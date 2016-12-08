@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程详细页</title>
+    <style>
+        body, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: aliceblue;
+        }
+        #container {
+            position: relative;
+            width: 980px;
+            height: 700px;
+            margin: 0px auto;
+            background-color: lavender;
+        }
+        #header {
+            position: absolute;
+            width: 980px;
+            height: 200px;
+            background: #79cfe6 url("img/indexHead.png") no-repeat 0 -30px;
+        }
+
+        #header .user {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 120px;
+            height: 30px;
+            padding-left: 40px;
+            /*border: 1px solid red;*/
+            text-align: center;
+            line-height: 30px;
+            background:  url("img/login2.png") no-repeat;
+        }
+        #quit {
+            color: #f1f1f1;
+            cursor: pointer;
+        }
+        #quit:hover {
+            color: red;;
+        }
+        #content{
+            position: absolute;
+            top: 200px;
+            padding: 20px;
+        }
+        #comment{
+            position: absolute;
+            top: 400px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oContent = document.getElementById('content');
+            var oComment = document.getElementById('comment');
+            //alert(oContent.offsetHeight)
+            oComment.style.top = oContent.offsetHeight+200+'px';
+        }
+    </script>
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="user">
+            <span id="user">小明同学</span>
+            <span id="quit">退出</span>
+        </div>
+    </div>
+    <div id="content">
+        <h3>java</h3>
+        <h5>教师：XXX</h5>
+        <h6>课程简介：</h6>
+        <p>随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点
+            随便写点随便写点随便写点随便写点随便写点随便写点随便写点
+        </p>
+        <p>下载:</p>
+        <span>教学课件</span><span>教学大纲</span>
+    </div>
+    <div id="comment">
+        <h5>评论：</h5>
+        <ul>
+            <li>
+                adadsdsad
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

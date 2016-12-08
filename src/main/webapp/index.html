@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程平台系统登录</title>
+    <style>
+        body{
+            background: url("img/1.jpg");
+        }
+        #login{
+            position: relative;
+            width: 300px;
+            height: 500px;
+            margin: 80px auto;
+            /*border: 1px solid red;*/
+            background-color: #f1f1f1;
+        }
+        img{
+            width: 300px;
+            height: 80px;
+        }
+        #name{
+            position: relative;
+            width: 260px;
+            height: 32px;
+            background: cornsilk url("img/login2.png") no-repeat ;
+            border: 1px solid #cccccc;
+            margin: 20px;
+            padding-left: 5px;
+        }
+        #username{
+            position: absolute;
+            right: 10px;
+            width: 200px;
+            height: 30px;
+            border: none;
+            background-color: cornsilk;
+            outline: none;
+        }
+        #psw{
+            position: relative;
+            width: 260px;
+            height: 32px;
+            background: cornsilk url("img/login2.png") no-repeat 0px -30px ;
+            border: 1px solid #cccccc;
+            margin: 20px 20px 40px 20px;
+            padding-left: 5px;
+        }
+        #password{
+            position: absolute;
+            right: 10px;
+            width: 200px;
+            height: 30px;
+            border: none;
+            background-color: cornsilk;
+            outline: none;
+        }
+        #psw .message{
+            position: absolute;
+            width: 260px;
+            height: 30px;
+            top: 40px;
+            left: 70px;
+            color: red;
+            display: none;
+        }
+        .usertype{
+            position: absolute;
+            left: 94px;
+            width: 300px;
+        }
+        .submit{
+            position: absolute;
+            width: 270px;
+            height: 34px;
+            left: 20px;
+            bottom: 200px;
+            background-color: cadetblue;
+            color: #f1f1f1;
+            border:0;
+            outline: none;
+            cursor: pointer;
+            letter-spacing: 5px;
+        }
+        .forget{
+            position: absolute;
+            left: 20px;
+            bottom: 170px;
+            color: blue;
+            font-size: 12px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="ajax.js"></script>
+    <script>
+        window.onload = function () {
+            var oUsername = document.getElementById('username');
+            var oPassword = document.getElementById('password');
+            var oForget = document.getElementsByTagName('span')[0];
+            var oStudent = document.getElementById('student');
+            var oMessage = document.getElementById('psw').getElementsByTagName('lable')[0];
+            var oBtn = document.getElementById('btn');
+            var oUsertype = 1;
+
+            oUsername.focus();
+            oForget.onclick = function () {
+                alert("忘记就算了吧。");
+            }
+
+            oBtn.onclick = function () {
+                if(oStudent.checked){
+                    oUsertype = 1;
+                }else {
+                    oUsertype = 0;
+                }
+                ajax({
+                    method: 'post',
+                    url: 'login',
+                    data: {
+                        account: encodeURI(oUsername.value),
+                        password: encodeURI(oPassword.value),
+                        type: encodeURI(oUsertype)
+                    },
+                    success: function (data) {
+//                        var data = JSON.parse(data);
+                        //alert(data);
+                        if(data.code=='1'){
+                            window.open('studentIndex.html');
+                        }
+                        else {
+                            oMessage.style.display = 'block';
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="login">
+        <!--<form action="#" method="post">-->
+            <img src="img/loginback.png"/>
+            <div id="name">
+                <input type="text" id="username" name="username" placeholder="请输入用户名"/><br/>
+            </div>
+            <div id="psw">
+                <input type="password" id="password" name="password" placeholder="请输入密码"/><br/>
+                <label class="message">用户名或密码错误</label>
+            </div>
+            <div class="usertype">
+                <input type="radio" id="student" name="usertype" checked/><label for="student">学生</label>
+                <input type="radio" id="teacher" name="usertype"/><label for="teacher">教师</label><br/>
+            </div>
+            <input class="submit" type="submit" id="btn" value="登录"/>
+            <span class="forget">忘记密码？</span>
+        <!--</form>-->
+    </div>
+</body>
+</html>
