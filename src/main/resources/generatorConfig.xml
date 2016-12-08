@@ -122,7 +122,7 @@
                enableDeleteByExample="false" enableSelectByExample="true"
                selectByExampleQueryId="false"/>
 
-        <table tableName="Student_course" domainObjectName="StudentCourse"
+        <table tableName="student_course" domainObjectName="StudentCourse"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="true"
                selectByExampleQueryId="false"/>
@@ -131,10 +131,6 @@
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="true"
                selectByExampleQueryId="false"/>
-
-
-
-
     </context>
 
 </generatorConfiguration>
