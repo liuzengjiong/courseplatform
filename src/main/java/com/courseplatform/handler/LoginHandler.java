@@ -46,6 +46,7 @@ public class LoginHandler {
         JSONObject jsonObject = new JSONObject();
         if (null != md5 && md5.length() > 0) {
             response.addCookie(new Cookie("userCode", md5));
+            response.addCookie(new Cookie("account",account));
             jsonObject.put("code", "1");
         } else {
             jsonObject.put("code", "0");

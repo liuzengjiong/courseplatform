@@ -97,37 +97,42 @@
         </javaClientGenerator>
 
         <!-- 要生成哪些表 -->
-        <table tableName="user" domainObjectName="User"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="true"
-               selectByExampleQueryId="false"/>
+        <!--<table tableName="user" domainObjectName="User"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="test_reports_model" domainObjectName="TestReportsModel"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="true"
-               selectByExampleQueryId="false"/>
+        <!--<table tableName="test_reports_model" domainObjectName="TestReportsModel"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="test_reports" domainObjectName="TestReports"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="true"
-               selectByExampleQueryId="false"/>
+        <!--<table tableName="test_reports" domainObjectName="TestReports"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="course" domainObjectName="Course"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="true"
-               selectByExampleQueryId="false"/>
+        <!--<table tableName="course" domainObjectName="Course"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="teacher_course" domainObjectName="TeacherCourse"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="true"
-               selectByExampleQueryId="false"/>
+        <!--<table tableName="teacher_course" domainObjectName="TeacherCourse"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="student_course" domainObjectName="StudentCourse"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="true"
-               selectByExampleQueryId="false"/>
+        <!--<table tableName="student_course" domainObjectName="StudentCourse"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="comment" domainObjectName="Comment"
+        <!--<table tableName="comment" domainObjectName="Comment"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false"/>-->
+
+        <table tableName="courseware" domainObjectName="Courseware"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="true"
                selectByExampleQueryId="false"/>

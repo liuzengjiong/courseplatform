@@ -92,44 +92,53 @@
         }
     </style>
     <script src="ajax.js"></script>
+    <script src="jquery.min.js"></script>
     <script>
         window.onload = function () {
             var oUsername = document.getElementById('username');
             var oPassword = document.getElementById('password');
             var oForget = document.getElementsByTagName('span')[0];
             var oStudent = document.getElementById('student');
-            var oMessage = document.getElementById('psw').getElementsByTagName('lable')[0];
+            var oMessage = document.getElementById('psw').getElementsByTagName('label')[0];
             var oBtn = document.getElementById('btn');
             var oUsertype = 1;
 
+                if(oStudent.checked){
+                    oUsertype = 1;
+                }else {
+                    oUsertype = 0;
+                }
+                
             oUsername.focus();
             oForget.onclick = function () {
                 alert("忘记就算了吧。");
             }
 
             oBtn.onclick = function () {
-                if(oStudent.checked){
-                    oUsertype = 1;
-                }else {
-                    oUsertype = 0;
-                }
-                ajax({
-                    method: 'post',
-                    url: 'login',
-                    data: {
-                        account: encodeURI(oUsername.value),
-                        password: encodeURI(oPassword.value),
-                        type: encodeURI(oUsertype)
+                $.ajax({
+                    url: "login",    //请求的url地址
+                    dataType: "json",   //返回格式为json
+                    async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                    data: { "account": encodeURI(oUsername.value),"password":encodeURI(oPassword.value),"type":oUsertype },    //参数值
+                    type: "POST",   //请求方式
+                    beforeSend: function() {
+                        //请求前的处理
                     },
-                    success: function (data) {
-//                        var data = JSON.parse(data);
-                        //alert(data);
-                        if(data.code=='1'){
-                            window.open('studentIndex.html');
+                    success: function(data) {
+                        //请求成功时处理
+                        if(data.code === '1'){
+                            oMessage.style.display = 'none';
+                            window.location.href = 'studentIndex.html';
                         }
                         else {
                             oMessage.style.display = 'block';
                         }
+                    },
+                    complete: function() {
+                        //请求完成的处理
+                    },
+                    error: function() {
+                        //请求出错处理
                     }
                 });
             }
