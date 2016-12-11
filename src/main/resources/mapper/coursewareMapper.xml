@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.courseplatform.dao.CoursewareMapper">
+    <!--插入多个课件文件-->
+    <insert id="insertCoursewares">
+        INSERT INTO courseware (courseware_id,course_id,teacher_account,courseware)
+        VALUES
+        <foreach collection="coursewares" item="courseware" separator=",">
+            (#{courseware.coursewareId},#{courseware.courseId},#{courseware.teacherAccount},#{courseware.courseware})
+        </foreach>
+    </insert>
+
+    <!--查询课程的课件文件 -->
+    <select id="selectByCourseIdAndTeacherAccount" resultType="Courseware">
+        SELECT *
+        FROM courseware
+        WHERE course_id = #{courseId} AND teacher_account = #{teacherAccount}
+    </select>
+</mapper>

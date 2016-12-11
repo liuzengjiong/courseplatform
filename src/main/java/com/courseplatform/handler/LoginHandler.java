@@ -39,14 +39,14 @@ public class LoginHandler {
      * @author ye
      * @dete 2016年12月8日21:23:24
      */
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public String login(HttpServletResponse response, String account, String password, int type) {
         String md5 = loginService.login(account, password, type);
         JSONObject jsonObject = new JSONObject();
         if (null != md5 && md5.length() > 0) {
             response.addCookie(new Cookie("userCode", md5));
-            response.addCookie(new Cookie("account",account));
+            response.addCookie(new Cookie("account", account));
             jsonObject.put("code", "1");
         } else {
             jsonObject.put("code", "0");
@@ -54,12 +54,13 @@ public class LoginHandler {
         LOG.info("Login:" + jsonObject.toString());
         return jsonObject.toString();
     }
+
     @RequestMapping("/test")
     @ResponseBody
-    public String test(){
+    public String test() {
         LOG.info("***************************************************");
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ll","Hello");
+        jsonObject.put("ll", "Hello");
         return jsonObject.toString();
     }
 

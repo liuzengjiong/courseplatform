@@ -1,16 +1,13 @@
 package com.courseplatform.dao;
 
+import com.courseplatform.bean.Course;
+import com.courseplatform.bean.Courseware;
 import com.courseplatform.bean.TeacherCourse;
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public interface TeacherCourseMapper {
@@ -21,9 +18,9 @@ public interface TeacherCourseMapper {
      * @mbggenerated Fri Dec 09 17:24:58 CST 2016
      */
     @Delete({
-        "delete from teacher_course",
-        "where course_id = #{courseId,jdbcType=VARCHAR}",
-          "and teacher_account = #{teacherAccount,jdbcType=VARCHAR}"
+            "delete from teacher_course",
+            "where course_id = #{courseId,jdbcType=VARCHAR}",
+            "and teacher_account = #{teacherAccount,jdbcType=VARCHAR}"
     })
     int deleteByPrimaryKey(@Param("courseId") String courseId, @Param("teacherAccount") String teacherAccount);
 
@@ -34,10 +31,10 @@ public interface TeacherCourseMapper {
      * @mbggenerated Fri Dec 09 17:24:58 CST 2016
      */
     @Insert({
-        "insert into teacher_course (course_id, teacher_account, ",
-        "courseware)",
-        "values (#{courseId,jdbcType=VARCHAR}, #{teacherAccount,jdbcType=VARCHAR}, ",
-        "#{courseware,jdbcType=VARCHAR})"
+            "insert into teacher_course (course_id, teacher_account, ",
+            "courseware)",
+            "values (#{courseId,jdbcType=VARCHAR}, #{teacherAccount,jdbcType=VARCHAR}, ",
+            "#{courseware,jdbcType=VARCHAR})"
     })
     int insert(TeacherCourse record);
 
@@ -48,16 +45,16 @@ public interface TeacherCourseMapper {
      * @mbggenerated Fri Dec 09 17:24:58 CST 2016
      */
     @Select({
-        "select",
-        "course_id, teacher_account, courseware",
-        "from teacher_course",
-        "where course_id = #{courseId,jdbcType=VARCHAR}",
-          "and teacher_account = #{teacherAccount,jdbcType=VARCHAR}"
+            "select",
+            "course_id, teacher_account, courseware",
+            "from teacher_course",
+            "where course_id = #{courseId,jdbcType=VARCHAR}",
+            "and teacher_account = #{teacherAccount,jdbcType=VARCHAR}"
     })
     @Results({
-        @Result(column="course_id", property="courseId", jdbcType=JdbcType.VARCHAR, id=true),
-        @Result(column="teacher_account", property="teacherAccount", jdbcType=JdbcType.VARCHAR, id=true),
-        @Result(column="courseware", property="courseware", jdbcType=JdbcType.VARCHAR)
+            @Result(column = "course_id", property = "courseId", jdbcType = JdbcType.VARCHAR, id = true),
+            @Result(column = "teacher_account", property = "teacherAccount", jdbcType = JdbcType.VARCHAR, id = true),
+            @Result(column = "courseware", property = "courseware", jdbcType = JdbcType.VARCHAR)
     })
     TeacherCourse selectByPrimaryKey(@Param("courseId") String courseId, @Param("teacherAccount") String teacherAccount);
 
@@ -68,14 +65,14 @@ public interface TeacherCourseMapper {
      * @mbggenerated Fri Dec 09 17:24:58 CST 2016
      */
     @Select({
-        "select",
-        "course_id, teacher_account, courseware",
-        "from teacher_course"
+            "select",
+            "course_id, teacher_account, courseware",
+            "from teacher_course"
     })
     @Results({
-        @Result(column="course_id", property="courseId", jdbcType=JdbcType.VARCHAR, id=true),
-        @Result(column="teacher_account", property="teacherAccount", jdbcType=JdbcType.VARCHAR, id=true),
-        @Result(column="courseware", property="courseware", jdbcType=JdbcType.VARCHAR)
+            @Result(column = "course_id", property = "courseId", jdbcType = JdbcType.VARCHAR, id = true),
+            @Result(column = "teacher_account", property = "teacherAccount", jdbcType = JdbcType.VARCHAR, id = true),
+            @Result(column = "courseware", property = "courseware", jdbcType = JdbcType.VARCHAR)
     })
     List<TeacherCourse> selectAll();
 
@@ -86,10 +83,20 @@ public interface TeacherCourseMapper {
      * @mbggenerated Fri Dec 09 17:24:58 CST 2016
      */
     @Update({
-        "update teacher_course",
-        "set courseware = #{courseware,jdbcType=VARCHAR}",
-        "where course_id = #{courseId,jdbcType=VARCHAR}",
-          "and teacher_account = #{teacherAccount,jdbcType=VARCHAR}"
+            "update teacher_course",
+            "set courseware = #{courseware,jdbcType=VARCHAR}",
+            "where course_id = #{courseId,jdbcType=VARCHAR}",
+            "and teacher_account = #{teacherAccount,jdbcType=VARCHAR}"
     })
     int updateByPrimaryKey(TeacherCourse record);
+
+    /**
+     * 获取教师的课程列表
+     *
+     * @param teacherAccount
+     * @return
+     * @author ye [15622797401@163.com]
+     * @date 2016/12/11 0:17
+     */
+    List<Course> selectByTeacherAccount(@Param("teacherAccount") String teacherAccount);
 }

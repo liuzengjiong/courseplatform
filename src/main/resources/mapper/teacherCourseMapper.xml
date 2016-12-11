@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.courseplatform.dao.UserMapper">
+<mapper namespace="com.courseplatform.dao.TeacherCourseMapper">
 
     <!-- 要对应到所有属性 才能使用-->
     <!--<resultMap id="users" type="User">
@@ -10,11 +10,10 @@
     </resultMap>-->
 
     <!-- 这里namespace必须是UserMapper接口的路径，不然要运行的时候要报错 "is not known to the MapperRegistry" -->
-
-    <select id="selectById" resultType="User">
-        SELECT *
-        FROM user
-        WHERE user.account = #{acount}
+    <select id="selectByTeacherAccount" resultType="Course">
+        SELECT c.*
+        FROM teacher_course AS tc LEFT JOIN course AS c ON c.course_id = tc.course_id
+        WHERE #{teacherAccount} = tc.teacher_account
     </select>
 
 </mapper>
