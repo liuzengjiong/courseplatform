@@ -1,7 +1,6 @@
 package com.courseplatform.dao;
 
 import com.courseplatform.bean.Course;
-import com.courseplatform.bean.Courseware;
 import com.courseplatform.bean.TeacherCourse;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
@@ -99,4 +98,18 @@ public interface TeacherCourseMapper {
      * @date 2016/12/11 0:17
      */
     List<Course> selectByTeacherAccount(@Param("teacherAccount") String teacherAccount);
+
+    /**
+     * 删除教师的某个课程
+     *
+     * @param courseId
+     *         courseId
+     * @param teacherAccount
+     *         教师账号
+     * @return
+     * @author ye [15622797401@163.com]
+     * @date 2016/12/12 12:57
+     */
+    int deleteTeacherAccount(@Param("courseId") String courseId, @Param("teacherAccount") String teacherAccount);
+
 }

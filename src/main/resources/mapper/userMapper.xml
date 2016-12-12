@@ -11,7 +11,7 @@
 
     <!-- 这里namespace必须是UserMapper接口的路径，不然要运行的时候要报错 "is not known to the MapperRegistry" -->
 
-    <select id="selectById" resultType="User">
+    <select id="selectById" resultType="com.courseplatform.bean.User">
         SELECT *
         FROM user
         WHERE user.account = #{acount}

@@ -3,6 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.courseplatform.dao.TeacherCourseMapper">
+    <delete id="deleteTeacherAccount">
+        DELETE * FROM teacher_course
+        WHERE course_id = #{courseId} AND teacher_account = #{teacherAccount}
+    </delete>
 
     <!-- 要对应到所有属性 才能使用-->
     <!--<resultMap id="users" type="User">
@@ -10,7 +14,7 @@
     </resultMap>-->
 
     <!-- 这里namespace必须是UserMapper接口的路径，不然要运行的时候要报错 "is not known to the MapperRegistry" -->
-    <select id="selectByTeacherAccount" resultType="Course">
+    <select id="selectByTeacherAccount" resultType="com.courseplatform.bean.Course">
         SELECT c.*
         FROM teacher_course AS tc LEFT JOIN course AS c ON c.course_id = tc.course_id
         WHERE #{teacherAccount} = tc.teacher_account

@@ -101,9 +101,13 @@ public class TeacherServiceImpl implements TeacherService {
      * @date 2016/12/11 0:36
      */
     @Override
-    @Transactional
     public List<Course> getCourseList(String account) {
         return teacherCourseMapper.selectByTeacherAccount(account);
+    }
+
+    @Override
+    public Course getCourse(String courseId, String account) {
+        return courseMapper.selectByPrimaryKey(courseId);
     }
 
     /**
@@ -137,5 +141,15 @@ public class TeacherServiceImpl implements TeacherService {
         for (String filepath : filepaths) {
             Courseware courseware = new Courseware(IDFactory.newID(), courseId, account, filepath);
         }
+    }
+
+    @Override
+    public int deleteCourseware(String coursewareId) {
+        return coursewareMapper.deleteByPrimaryKey(coursewareId);
+    }
+
+    @Override
+    public int deleteCourse(String courseId, String account) {
+        return teacherCourseMapper.deleteTeacherAccount(courseId, account);
     }
 }

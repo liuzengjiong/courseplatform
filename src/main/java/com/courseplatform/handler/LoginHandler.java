@@ -1,7 +1,10 @@
 package com.courseplatform.handler;
 
 import com.alibaba.fastjson.JSONObject;
+import com.courseplatform.bean.ResponseCode;
 import com.courseplatform.services.LoginService;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +43,13 @@ public class LoginHandler {
      * @dete 2016年12月8日21:23:24
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ApiOperation(value = "登录", httpMethod = "POST", response = ResponseCode.class, notes = "login")
     @ResponseBody
-    public String login(HttpServletResponse response, String account, String password, int type) {
+    public String login(HttpServletResponse response,
+                        @ApiParam(required = true, value = "用户账号") String account,
+                        @ApiParam(required = true, value = "用户密码") String password,
+                        @ApiParam(required = true, value = "用户类型") int type) {
+
         String md5 = loginService.login(account, password, type);
         JSONObject jsonObject = new JSONObject();
         if (null != md5 && md5.length() > 0) {
@@ -55,7 +63,7 @@ public class LoginHandler {
         return jsonObject.toString();
     }
 
-    @RequestMapping("/test")
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
     public String test() {
         LOG.info("***************************************************");
