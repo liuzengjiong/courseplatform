@@ -47,24 +47,6 @@ public interface TeacherService {
     @Transactional
     Course getCourse(String courseId, String account);
 
-    @Transactional
-    List<Courseware> getCourseware(String courseId, String account);
-
-    @Transactional
-    void addCoursewares(String account, String courseId, String[] filepaths);
-
-    /**
-     * 删除课件
-     *
-     * @param coursewareId
-     *         课件id
-     * @return 是否删除成功
-     * @author ye [15622797401@163.com]
-     * @date 2016/12/12 12:38
-     */
-    @Transactional
-    int deleteCourseware(String coursewareId);
-
     /**
      * 删除老师的课程
      *

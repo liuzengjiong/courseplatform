@@ -110,44 +110,6 @@ public class TeacherServiceImpl implements TeacherService {
         return courseMapper.selectByPrimaryKey(courseId);
     }
 
-    /**
-     * 获取教师的课程id为courseId的课程的所有课件文件列表
-     *
-     * @param courseId
-     *         课程id
-     * @param account
-     *         教师账号
-     * @return 课件列表
-     * @author ye [15622797401@163.com]
-     * @date 2016/12/11 0:37
-     */
-    @Override
-    @Transactional
-    public List<Courseware> getCourseware(String courseId, String account) {
-        return coursewareMapper.selectByCourseIdAndTeacherAccount(courseId, account);
-    }
-
-    /**
-     * 添加课件文件
-     *
-     * @param account
-     * @param courseId
-     * @param filepaths
-     */
-    @Override
-    @Transactional
-    public void addCoursewares(String account, String courseId, String[] filepaths) {
-        List<Courseware> coursewares = new ArrayList<>();
-        for (String filepath : filepaths) {
-            Courseware courseware = new Courseware(IDFactory.newID(), courseId, account, filepath);
-        }
-    }
-
-    @Override
-    public int deleteCourseware(String coursewareId) {
-        return coursewareMapper.deleteByPrimaryKey(coursewareId);
-    }
-
     @Override
     public int deleteCourse(String courseId, String account) {
         return teacherCourseMapper.deleteTeacherAccount(courseId, account);

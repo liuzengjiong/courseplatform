@@ -5,6 +5,7 @@ import com.courseplatform.bean.Course;
 import com.courseplatform.bean.Courseware;
 import com.courseplatform.bean.ResponseCode;
 import com.courseplatform.bean.User;
+import com.courseplatform.services.CoursewareService;
 import com.courseplatform.services.TeacherService;
 import com.courseplatform.util.FileUtil;
 import com.courseplatform.util.MD5Util;
@@ -34,6 +35,9 @@ public class TeacherHandler {
 
     @Autowired
     private TeacherService teacherService;
+
+    @Autowired
+    private CoursewareService coursewareService;
 
     /**
      * 用于验证用户是否已经登录 使用cookie进行验证
@@ -70,7 +74,13 @@ public class TeacherHandler {
     @ResponseBody
     public String info() {
         LOG.info("TeacherHandler--info--return:" + JSONObject.toJSONString(user));
-        return JSONObject.toJSONString(user);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code", "0");
+        if (null != user) {
+            jsonObject.put("code", "1");
+            jsonObject.put("user", user);
+        }
+        return jsonObject.toString();
     }
 
     /**
@@ -119,6 +129,7 @@ public class TeacherHandler {
      * @date 2016/12/12 13:02
      */
     @RequestMapping(value = "/deleteCourse", method = RequestMethod.DELETE)
+    @ResponseBody
     public String deleteCourse(String courseId) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code", "0");
@@ -190,7 +201,7 @@ public class TeacherHandler {
     public String uploadAddCourseware(@RequestParam MultipartFile[] files, String courseId) {
         JSONObject jsonObject = new JSONObject();
         try {
-            teacherService.addCoursewares(user.getAccount(), courseId, FileUtil.uploadFile(files, request));
+            coursewareService.addCoursewares(user.getAccount(), courseId, FileUtil.uploadFile(files, request));
             jsonObject.put("code", "1");
         } catch (IOException e) {
             jsonObject.put("code", "0");
@@ -212,7 +223,7 @@ public class TeacherHandler {
     public String getCoursewaresByCourse(String courseId) {
         JSONObject jsonObject = new JSONObject();
         if (null != user) {
-            List<Courseware> coursewares = teacherService.getCourseware(courseId, user.getAccount());
+            List<Courseware> coursewares = coursewareService.getCourseware(courseId, user.getAccount());
             jsonObject.put("code", "1");
             jsonObject.put("size", coursewares.size());
             jsonObject.put("list", coursewares);
@@ -237,7 +248,7 @@ public class TeacherHandler {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code", "0");
         if (null != user) {
-            int i = teacherService.deleteCourseware(cousewareId);
+            int i = coursewareService.deleteCourseware(cousewareId);
             if (i == 1) {
                 jsonObject.put("code", "1");
             }
