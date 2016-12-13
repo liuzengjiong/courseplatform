@@ -75,6 +75,12 @@ public class TeacherHandlerTest {
         testDelete(url, data);
     }
 
+    @Test
+    public void testStudentGetCourses() throws Exception {
+        String url = "/student/getCourses";
+        testGet(url, new HashMap<>());
+    }
+
     public void testDelete(String url, Map<String, String> data) throws Exception {
 
         // 13154400 9a047e8f07f11f917fa9f75812613c5c
@@ -97,8 +103,12 @@ public class TeacherHandlerTest {
     public void testGet(String url, Map<String, String> data) throws Exception {
 
         // 13154400 9a047e8f07f11f917fa9f75812613c5c
-        Cookie cookie1 = new Cookie("account", "131544200");
-        Cookie cookie2 = new Cookie("userCode", "9a047e8f07f11f917fa9f75812613c5c");
+        // 131544215 : 5a66f14e226173b3eb135e65484f165f
+        Cookie cookie1 = new Cookie("account", "131544215");
+        Cookie cookie2 = new Cookie("userCode", "5a66f14e226173b3eb135e65484f165f");
+
+//        Cookie cookie1 = new Cookie("account", "131544200");
+//        Cookie cookie2 = new Cookie("userCode", "9a047e8f07f11f917fa9f75812613c5c");
         // post
         MockHttpServletRequestBuilder builder = get(url);
         // 参数

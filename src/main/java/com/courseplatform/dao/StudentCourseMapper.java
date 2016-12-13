@@ -62,19 +62,6 @@ public interface StudentCourseMapper {
      * @param studentAccount
      * @return
      */
-    @Select({
-            "select",
-            "c.*",
-            "from student_account as sa left join course as c on sa.course_id = c.course_id",
-            "where sa.student_account = #{studentAccount,jdbcType=VARCHAR}"
-    })
-    @Results({
-            @Result(column = "course_id", property = "courseId", jdbcType = JdbcType.VARCHAR, id = true),
-            @Result(column = "course_name", property = "courseName", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "time", property = "time", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "course_introduction", property = "courseIntroduction", jdbcType = JdbcType.LONGVARCHAR),
-            @Result(column = "course_syllabus", property = "courseSyllabus", jdbcType = JdbcType.LONGVARCHAR)
-    })
     List<Course> selectCoursesByStudent(@Param("studentAccount") String studentAccount);
 
 }

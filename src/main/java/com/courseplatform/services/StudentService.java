@@ -45,7 +45,5 @@ public interface StudentService {
      */
     @Transactional
     List<Course> getCourses(String studentAccount);
-
-
 }
 

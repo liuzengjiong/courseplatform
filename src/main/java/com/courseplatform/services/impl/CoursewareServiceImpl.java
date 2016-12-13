@@ -26,10 +26,11 @@ public class CoursewareServiceImpl implements CoursewareService {
     }
 
     @Override
-    public int addCoursewares(String teacherAccount, String courseId, String[] filepaths) {
+    public int addCoursewares(String teacherAccount, String courseId, String[] filenames) {
         List<Courseware> coursewares = new ArrayList<>();
-        for (String filepath : filepaths) {
-            Courseware courseware = new Courseware(IDFactory.newID(), courseId, teacherAccount, filepath);
+        for (String filename : filenames) {
+            String filepath = "/uploadFile/" + teacherAccount + "/" + courseId + "/" + filename;
+            Courseware courseware = new Courseware(IDFactory.newID(), courseId, teacherAccount, filename, filepath);
         }
         return coursewareMapper.insertCoursewares(coursewares);
     }
