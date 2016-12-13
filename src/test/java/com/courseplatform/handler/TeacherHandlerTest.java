@@ -17,8 +17,7 @@ import javax.servlet.http.Cookie;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -56,16 +55,43 @@ public class TeacherHandlerTest {
     @Test
     public void testAddCourse() throws Exception {
         String url = "/teacher/addCourse";
-        Map<String,String> data = new HashMap<>();
-        data.put("courseName","java课程设计");
-        data.put("courseIntroduction","java课程设计的");
-        test(url,data);
+        Map<String, String> data = new HashMap<>();
+        data.put("courseName", "java课程设计");
+        data.put("courseIntroduction", "java课程设计的");
+        test(url, data);
     }
 
     @Test
     public void testGetCourses() throws Exception {
         String url = "/teacher/getCourses";
-        testGet(url,new HashMap<>());
+        testGet(url, new HashMap<>());
+    }
+
+    @Test
+    public void testDeleteCourse() throws Exception {
+        String url = "/teacher/deleteCourse";
+        Map<String, String> data = new HashMap<>();
+        data.put("courseId", "111");
+        testDelete(url, data);
+    }
+
+    public void testDelete(String url, Map<String, String> data) throws Exception {
+
+        // 13154400 9a047e8f07f11f917fa9f75812613c5c
+        Cookie cookie1 = new Cookie("account", "131544200");
+        Cookie cookie2 = new Cookie("userCode", "9a047e8f07f11f917fa9f75812613c5c");
+        // post
+        MockHttpServletRequestBuilder builder = delete(url);
+        // 参数
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            builder.param(entry.getKey(), entry.getValue());
+        }
+        // cookie
+        builder.cookie(cookie1, cookie2);
+        // 请求
+        mockMvc.perform((builder))
+                .andExpect(status().isOk())
+                .andDo(print());
     }
 
     public void testGet(String url, Map<String, String> data) throws Exception {

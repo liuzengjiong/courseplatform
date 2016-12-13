@@ -3,10 +3,65 @@
  */
 window.onload = function () {
 
-    console.info("刷新准备")
+
+    var oUl = document.getElementById('list');//课程列表
+    var oUser = document.getElementById('user');
     //刷新列表
-    refleshList();
-    console.info("刷新完成" + aSpan.length)
+    //refleshList();
+
+    //JQuery ajax()请求数据
+    $.ajax({
+        url: "/teacher/getCourses",    //请求的url地址
+        dataType: "json",   //返回格式为json
+        async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+        data: {},    //参数值
+        type: "GET",   //请求方式
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (data) {
+            //请求成功时处理
+            if (data.code === '1') {
+                oUl.innerHTML = '';//清除列表
+                oUser.innerHTML = data.username;
+                for (var i = 0; i < data.size; i++) {
+                    var li = document.createElement('li');
+                    var oA = document.createElement('a');//课程名
+                    var oEm = document.createElement('em');//存放courseID
+                    var oSpan = document.createElement('span');//删除
+                    oA.innerHTML = data.list[i].courseName;
+                    oEm.innerHTML = data.list[i].courseId;
+                    oSpan.innerHTML = '删除';
+                    oA.href = 'javascript:;';
+                    li.appendChild(oA);
+                    li.appendChild(oEm);
+                    li.appendChild(oSpan);
+                    oUl.appendChild(li);
+                    //oEm.style.visibility="hidden";
+
+                    oSpan.onclick = function () {
+                        var _this = this;
+                        var id = oEm.innerHTML;
+                        if (confirm('是否要删除这门课程？')) {
+                            $.ajax({
+                                url: "/teacher/deleteCourse",    //请求的url地址
+                                dataType: "json",   //返回格式为json
+                                async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                                data: {courseId: id},    //参数值
+                                type: "GET",   //请求方式
+                                success: function (data) {
+                                    //请求成功时处理
+                                    if (data.code === '1') {
+                                        oUl.removeChild(_this.parentNode);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    });
 
     var oAdd = document.getElementById('add');//添加按钮
     var oCancel = document.getElementById('cancel');//取消按钮
@@ -15,43 +70,37 @@ window.onload = function () {
     var aInput = oAddPanel.getElementsByTagName('input');//添加课程时输入的名称与教师
     var oIntroduction = document.getElementById('introduction');//添加的课程的简介
     var oSure = document.getElementById('sure');//确定添加按钮
-    var oUl = document.getElementById('list');//课程列表
-    var aSpan = oUl.getElementsByTagName('span');//原有的课程列表中的删除按钮
+    var aSpan = oUl.getElementsByTagName('span');//课程列表中的删除按钮
     var oUploadFile = document.getElementById('uploadFile');//上传文档
     var oUpload = document.getElementById('upload');//显示上传文档层
     var oUploadUl = oUpload.getElementsByTagName('ul')[0];//显示上传的文档列表
     var oAddfile = document.getElementById('addfile');
-    var oUser = document.getElementById('user');
 
 
-    // 对本来就已经有的课程的删除操作
-    for (var i = 0; i < aSpan.length; i++) {
-        console.info("注册点击事件" + i)
-        aSpan[i].index = i;
-        aSpan[i].onclick = function () {
-                console.info("abc")
-                var courseId = parseInt(aSpan[this.index].parentNode.getElementsByTagName('em')[0].innerHTML);
-                alert(courseId)
-                if (confirm('是否要删除这门课程？')) {
-                    $.ajax({
-                        url: "/teacher/deleteCourse",    //请求的url地址
-                        dataType: "json",   //返回格式为json
-                        async: true, //请求是否异步，默认为异步，这也是ajax重要特性
-                        data: {courseId: courseId},    //参数值
-                        type: "DELETE",   //请求方式
-                        success: function (data) {
-                            //请求成功时处理
-                            if (data.code === '1') {
-                                oUl.removeChild(this.parentNode);
-                            }
-                        }
-                    });
-                    oUl.removeChild(this.parentNode);
-                }
-        }
-    }
-
-
+    //对课程的删除操作
+    /* for (var i = 0; i < aSpan.length; i++) {
+     aSpan[i].index = i;
+     aSpan[i].onclick = function () {
+     var id = parseInt(aSpan[this.index].parentNode.getElementsByTagName('em')[0].innerHTML);
+     alert(id)
+     if (confirm('是否要删除这门课程？')) {
+     $.ajax({
+     url: "/teacher/deleteCourse",    //请求的url地址
+     dataType: "json",   //返回格式为json
+     async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+     data: {courseId: id},    //参数值
+     type: "DELETE",   //请求方式
+     success: function (data) {
+     //请求成功时处理
+     if (data.code === '1') {
+     oUl.removeChild(this.parentNode);
+     }
+     }
+     });
+     oUl.removeChild(this.parentNode);
+     }
+     }
+     }*/
     //添加操作
     oAdd.onclick = function () {
         oAddWrap.style.display = 'block';
@@ -194,67 +243,66 @@ window.onload = function () {
      }
      }*/
 
-    function refleshList() {
-    //JQuery ajax()请求数据
-        $.ajax({
-            url: "/teacher/getCourses",    //请求的url地址
-            dataType: "json",   //返回格式为json
-            async: true, //请求是否异步，默认为异步，这也是ajax重要特性
-            data: {},    //参数值
-            type: "GET",   //请求方式
-            beforeSend: function () {
-                //请求前的处理
-            },
-            success: function (data) {
-                //请求成功时处理
-                if (data.code === '1') {
-                    oUl.innerHTML = '';//清除列表
-                    oUser.innerHTML = data.username;
-                    for (var i = 0; i < data.size; i++) {
-                        var li = document.createElement('li');
-                        var oA = document.createElement('a');//课程名
-                        var oEm = document.createElement('em');//存放courseID
-                        var oSpan = document.createElement('span');//删除
-                        // oSpan.setAttribute("class","deleteSpan");
-                        oA.innerHTML = data.list[i].courseName;
-                        oEm.innerHTML = data.list[i].courseId;
-                        oSpan.innerHTML = '删除';
-                        oA.href = 'javascript:;';
-                        li.appendChild(oA);
-                        li.appendChild(oEm);
-                        li.appendChild(oSpan);
-                        oUl.appendChild(li);
-                        oEm.style.visibility="hidden";
+    /* function refleshList() {
+     //JQuery ajax()请求数据
+     $.ajax({
+     url: "/teacher/getCourses",    //请求的url地址
+     dataType: "json",   //返回格式为json
+     async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+     data: {},    //参数值
+     type: "GET",   //请求方式
+     beforeSend: function () {
+     //请求前的处理
+     },
+     success: function (data) {
+     //请求成功时处理
+     if (data.code === '1') {
+     oUl.innerHTML = '';//清除列表
+     oUser.innerHTML = data.username;
+     for (var i = 0; i < data.size; i++) {
+     var li = document.createElement('li');
+     var oA = document.createElement('a');//课程名
+     var oEm = document.createElement('em');//存放courseID
+     var oSpan = document.createElement('span');//删除
+     oA.innerHTML = data.list[i].courseName;
+     oEm.innerHTML = data.list[i].courseId;
+     oSpan.innerHTML = '删除';
+     oA.href = 'javascript:;';
+     li.appendChild(oA);
+     li.appendChild(oEm);
+     li.appendChild(oSpan);
+     oUl.appendChild(li);
+     //oEm.style.visibility="hidden";
 
-                        //对课程的删除操作
-                        /*oSpan.onclick = function () {
-                         //alert(1);
-                         var courseId = this.parentNode;
-                         if (confirm('是否要删除这门课程？')) {
-                         $.ajax({
-                         url: "/teacher/deleteCourse",    //请求的url地址
-                         dataType: "json",   //返回格式为json
-                         async: true, //请求是否异步，默认为异步，这也是ajax重要特性
-                         data: { courseId: parseInt(courseId)  },    //参数值
-                         type: "DELETE",   //请求方式
-                         success: function (data) {
-                         //请求成功时处理
-                         if( data.code === '1' ){
-                         oUl.removeChild(this.parentNode);
-                         }
-                         }
-                         });
-                         }
-                         }*/
-                    }
-                }
-            },
-            complete: function () {
-                //请求完成的处理
-            },
-            error: function () {
-                //请求出错处理
-            }
-        });
-    }
+     //对课程的删除操作
+     /!*oSpan.onclick = function () {
+     //alert(1);
+     var courseId = this.parentNode;
+     if (confirm('是否要删除这门课程？')) {
+     $.ajax({
+     url: "/teacher/deleteCourse",    //请求的url地址
+     dataType: "json",   //返回格式为json
+     async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+     data: { courseId: parseInt(courseId)  },    //参数值
+     type: "DELETE",   //请求方式
+     success: function (data) {
+     //请求成功时处理
+     if( data.code === '1' ){
+     oUl.removeChild(this.parentNode);
+     }
+     }
+     });
+     }
+     }*!/
+     }
+     }
+     },
+     complete: function () {
+     //请求完成的处理
+     },
+     error: function () {
+     //请求出错处理
+     }
+     });
+     }*/
 }

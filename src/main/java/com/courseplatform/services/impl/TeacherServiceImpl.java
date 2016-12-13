@@ -50,7 +50,7 @@ public class TeacherServiceImpl implements TeacherService {
      */
     @Override
     @Transactional
-    public boolean addCourse(String account, Course course, String[] filepaths) {
+    public boolean addCourse(String account, Course course, String[] filenames) {
         User user = userMapper.selectByPrimaryKey(account);
 
         int i = courseMapper.insert(course);
@@ -63,13 +63,14 @@ public class TeacherServiceImpl implements TeacherService {
 
         // 设置老师的课件
         List<Courseware> coursewares = new ArrayList<>();
-        for (String filepath : filepaths) {
-            Courseware courseware = new Courseware(IDFactory.newID(), teacherCourse.getCourseId(), teacherCourse.getTeacherAccount(), filepath);
+        for (String filename : filenames) {
+            String filepath = "/uploadFile/" + account + "/" + course.getCourseId() + filename;
+            Courseware courseware = new Courseware(IDFactory.newID(), teacherCourse.getCourseId(), teacherCourse.getTeacherAccount(), filename, filepath);
             coursewares.add(courseware);
         }
         int k = coursewareMapper.insertCoursewares(coursewares);
 
-        return i + j + k == 2 + filepaths.length;
+        return i + j + k == 2 + filenames.length;
     }
 
 

@@ -131,9 +131,9 @@ public class TeacherHandler {
      * @author ye [15622797401@163.com]
      * @date 2016/12/12 13:02
      */
-    @RequestMapping(value = "/deleteCourse", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deleteCourse", method = RequestMethod.GET)
     @ResponseBody
-    public String deleteCourse(String courseId) {
+    public String deleteCourse(@RequestParam(value = "courseId") String courseId) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code", "0");
         if (null != user) {
@@ -164,9 +164,11 @@ public class TeacherHandler {
         jsonObject.put("code", "0");
         if (null != user) {
             Course course = teacherService.getCourse(courseId, user.getAccount());
-            if (null != course) {
+            List<Courseware> coursewares = coursewareService.getCourseware(courseId, user.getAccount());
+            if (null != course && null != coursewares) {
                 jsonObject.put("code", "1");
                 jsonObject.put("course", course);
+                jsonObject.put("coursewares", coursewares);
             }
         }
         return jsonObject.toString();
@@ -276,7 +278,7 @@ public class TeacherHandler {
      * @date 2016/12/12 20:09
      */
     private String[] uploadFiles(MultipartFile[] files, String courseId) throws IOException {
-        String path = request.getSession().getServletContext().getRealPath("/WEB-INF/file");
+        String path = request.getSession().getServletContext().getRealPath("/uploadFile");
         path += "/" + user.getAccount() + "/" + courseId;
         File dir = new File(path);
         if (!dir.exists()) {

@@ -20,8 +20,9 @@
     <resultMap id="courseware" type="com.courseplatform.bean.Courseware">
         <result column="courseware_id" property="coursewareId"/>
         <result column="course_id" property="courseId"/>
-        <result column="courseware" property="courseware"/>
+        <result column="courseware_name" property="coursewareName"/>
         <result column="teacher_account" property="teacherAccount"/>
+        <result column="file_path" property="filePath"/>
     </resultMap>
 
 </mapper>
