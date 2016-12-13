@@ -14,10 +14,18 @@
     </resultMap>-->
 
     <!-- 这里namespace必须是UserMapper接口的路径，不然要运行的时候要报错 "is not known to the MapperRegistry" -->
-    <select id="selectByTeacherAccount" resultType="com.courseplatform.bean.Course">
+    <select id="selectByTeacherAccount" resultMap="Course">
         SELECT c.*
         FROM teacher_course AS tc LEFT JOIN course AS c ON c.course_id = tc.course_id
         WHERE #{teacherAccount} = tc.teacher_account
     </select>
+
+    <resultMap id="Course" type="com.courseplatform.bean.Course">
+        <result column="course_id" property="courseId"/>
+        <result column="course_name" property="courseName"/>
+        <result column="course_introduction" property="courseIntroduction"/>
+        <result column="course_syllabus" property="courseSyllabus"/>
+        <result column="time" property="time"/>
+    </resultMap>
 
 </mapper>

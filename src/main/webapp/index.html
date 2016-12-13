@@ -91,30 +91,31 @@
             cursor: pointer;
         }
     </style>
-    <script src="ajax.js"></script>
-    <script src="jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script>
         window.onload = function () {
             var oUsername = document.getElementById('username');
             var oPassword = document.getElementById('password');
             var oForget = document.getElementsByTagName('span')[0];
             var oStudent = document.getElementById('student');
+            var oTeacher = document.getElementById('teacher');
             var oMessage = document.getElementById('psw').getElementsByTagName('label')[0];
             var oBtn = document.getElementById('btn');
             var oUsertype = 1;
 
-                if(oStudent.checked){
-                    oUsertype = 1;
-                }else {
-                    oUsertype = 0;
-                }
-                
+
+
             oUsername.focus();
             oForget.onclick = function () {
                 alert("忘记就算了吧。");
             }
 
             oBtn.onclick = function () {
+                if(oStudent.checked){
+                    oUsertype = 1;
+                }else {
+                    oUsertype = 0;
+                }
                 $.ajax({
                     url: "login",    //请求的url地址
                     dataType: "json",   //返回格式为json
@@ -128,7 +129,12 @@
                         //请求成功时处理
                         if(data.code === '1'){
                             oMessage.style.display = 'none';
-                            window.location.href = 'studentIndex.html';
+                            if(oUsertype === 1){
+                                window.location.href = 'subHtml/studentIndex.html';
+                            }
+                            else if(oUsertype === 0){
+                                window.location.href = 'subHtml/teacherIndex.html';
+                            }
                         }
                         else {
                             oMessage.style.display = 'block';

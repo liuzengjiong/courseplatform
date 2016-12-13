@@ -1,0 +1,176 @@
+body{
+    background-color: aliceblue;
+}
+body,ul,li{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style: none;
+}
+#container{
+    position: relative;
+    width: 980px;
+    min-height: 700px;
+    margin: 0 auto;
+    background-color: lavender;
+}
+#header {
+    position: absolute;
+    width: 980px;
+    height: 200px;
+    background: #79cfe6 url("../img/indexHead.png") no-repeat 0 -30px;
+}
+#header .user {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 120px;
+    height: 30px;
+    padding-left: 40px;
+    /*border: 1px solid red;*/
+    text-align: center;
+    line-height: 30px;
+    background:  url("../img/login2.png") no-repeat;
+}
+#quit {
+    color: #f1f1f1;
+    cursor: pointer;
+}
+#quit:hover {
+    color: red;;
+}
+#content{
+    position: absolute;
+    width: 960px;
+    min-height: 400px;
+    padding: 10px;
+    /*border: 1px solid red;*/
+    top: 200px;
+}
+#add{
+    position: absolute;
+    top: 16px;
+    right: 50px;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #cccccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#add:hover{
+    background-color: yellow;
+    color: #ff0000;
+}
+#list{
+    width: 100%;
+}
+#list li{
+    width: 940px;
+    height: 40px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    line-height: 40px;
+    background-color: aquamarine;
+}
+#list li a{
+    text-decoration: none;
+}
+#list li a:hover{
+    color: #ffffff;
+}
+#list li span{
+    position: absolute;
+    right: 50px;
+    width: 50px;
+    height: 30px;
+    margin-top: 6px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #c1c1c1;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#list li span:hover{
+    background-color: yellow;
+    color: #ff0000;
+}
+#footer{
+    position: absolute;
+    width: 980px;
+    height: 50px;/*
+            border: 1px solid red;*/
+    text-align: center;
+    line-height: 30px;
+    bottom: 0;
+}
+#wrap{
+    position: absolute;
+    top:0;
+    width: 1350px;
+    height: 700px;
+    background-color: rgba(173,173,173,0.5);
+    display: none;
+}
+#addPanel{
+    position: absolute;
+    top: 100px;
+    left: 400px;
+    width: 600px;
+    min-height: 400px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+#cancel{
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #79cfe6;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+}
+#addPanel input{
+    margin-bottom: 20px;
+}
+#addPanel textarea{
+    width: 520px;
+    height: 120px;
+    resize: none;
+}
+#addfile{
+    width: 50px;
+}
+#sure{
+    position: absolute;
+    right: 20px;
+    bottom: 0px;
+}
+#upload li{
+    border-bottom: 1px dotted #cccccc;
+}
+#upload strong{
+    height: 20px;
+    font-size: 12px;
+    font-weight: normal;
+}
+#upload span{
+    position: absolute;
+    height: 20px;
+    font-size: 12px;
+    right: 100px;
+    cursor: pointer;
+}
+#upload span:hover{
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+#upload em{
+    display: none;
+}

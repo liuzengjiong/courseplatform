@@ -1,0 +1,50 @@
+body{
+    background-color: aliceblue;
+}
+body,ul,li{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style: none;
+}
+#container{
+    position: relative;
+    width: 980px;
+    min-height: 700px;
+    margin: 0 auto;
+    background-color: lavender;
+}
+#header {
+    position: absolute;
+    width: 980px;
+    height: 200px;
+    background: #79cfe6 url("../img/indexHead.png") no-repeat 0 -30px;
+}
+#header .user {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 120px;
+    height: 30px;
+    padding-left: 40px;
+    /*border: 1px solid red;*/
+    text-align: center;
+    line-height: 30px;
+    background:  url("../img/login2.png") no-repeat;
+}
+#quit {
+    color: #f1f1f1;
+    cursor: pointer;
+}
+#quit:hover {
+    color: red;;
+}
+#content{
+    position: absolute;
+    width: 960px;
+    min-height: 400px;
+    padding: 10px;
+    /*border: 1px solid red;*/
+    top: 200px;
+}

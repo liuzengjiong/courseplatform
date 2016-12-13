@@ -53,10 +53,6 @@ public class TeacherServiceImpl implements TeacherService {
     public boolean addCourse(String account, Course course, String[] filepaths) {
         User user = userMapper.selectByPrimaryKey(account);
 
-        // 设置主键
-        course.setCourseId(IDFactory.newID());
-        // 设置时间
-        course.setTime(new Date());
         int i = courseMapper.insert(course);
 
         // 设置该老师的课程

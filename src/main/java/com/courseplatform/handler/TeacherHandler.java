@@ -8,6 +8,7 @@ import com.courseplatform.bean.User;
 import com.courseplatform.services.CoursewareService;
 import com.courseplatform.services.TeacherService;
 import com.courseplatform.util.FileUtil;
+import com.courseplatform.util.IDFactory;
 import com.courseplatform.util.MD5Util;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -90,17 +93,14 @@ public class TeacherHandler {
      *         课程课件
      * @param course
      *         课程信息
-     * @param request
-     *         请求
      * @return 添加课程是否成功
      * @author ye [15622797401@163.com]
      * @date 2016/12/10 23:03
      */
     @RequestMapping(value = "/addCourse", method = RequestMethod.POST)
     @ApiOperation(value = "添加课程", response = ResponseCode.class, notes = "老师添加课程")
-    @ResponseBody
     public String addCourse(@ApiParam("课件文件") @RequestParam(value = "files", required = false) MultipartFile[] files,
-                            Course course, HttpServletRequest request) {
+                            Course course) {
         String courseJson = JSONObject.toJSONString(course);
         LOG.info("addCourse:" + course.toString());
 //        for (int i = 0; i < files.length; i++) {
@@ -110,13 +110,16 @@ public class TeacherHandler {
         JSONObject jsonObject = new JSONObject();
         try {
             // 上传课件文件
-            teacherService.addCourse(user.getAccount(), course, FileUtil.uploadFile(files, request));
+            course.setCourseId(IDFactory.newID());
+            // 设置时间
+            course.setTime(new Date());
+            teacherService.addCourse(user.getAccount(), course, uploadFiles(files, course.getCourseId()));
             jsonObject.put("code", "1");
         } catch (IOException e) {
             // 上传失败
             jsonObject.put("code", "0");
         }
-        return jsonObject.toString();
+        return "redirect:/subHtml/teacherIndex.html";
     }
 
     /**
@@ -134,11 +137,14 @@ public class TeacherHandler {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code", "0");
         if (null != user) {
+            LOG.info("delete:[courseId:" + courseId + ",account:" + user.getAccount() + "]");
             int i = teacherService.deleteCourse(courseId, user.getAccount());
+            LOG.info("i:" + i);
             if (i == 1) {
                 jsonObject.put("code", "1");
             }
         }
+        LOG.info(jsonObject.toString());
         return jsonObject.toString();
     }
 
@@ -177,10 +183,13 @@ public class TeacherHandler {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code", 0);
         if (null != user) {
+            LOG.info("getCourses-user:" + user.getAccount());
             List<Course> courses = teacherService.getCourseList(user.getAccount());
             jsonObject.put("code", "1");
             jsonObject.put("size", courses.size());
             jsonObject.put("list", courses);
+            jsonObject.put("username", user.getName());
+            LOG.info(jsonObject.toString());
         }
         return jsonObject.toJSONString();
     }
@@ -201,7 +210,7 @@ public class TeacherHandler {
     public String uploadAddCourseware(@RequestParam MultipartFile[] files, String courseId) {
         JSONObject jsonObject = new JSONObject();
         try {
-            coursewareService.addCoursewares(user.getAccount(), courseId, FileUtil.uploadFile(files, request));
+            coursewareService.addCoursewares(user.getAccount(), courseId, uploadFiles(files, courseId));
             jsonObject.put("code", "1");
         } catch (IOException e) {
             jsonObject.put("code", "0");
@@ -254,6 +263,26 @@ public class TeacherHandler {
             }
         }
         return jsonObject.toString();
+    }
+
+    /**
+     * 上传课件文件，设置好路径
+     *
+     * @param files
+     * @param courseId
+     * @return
+     * @throws IOException
+     * @author ye [15622797401@163.com]
+     * @date 2016/12/12 20:09
+     */
+    private String[] uploadFiles(MultipartFile[] files, String courseId) throws IOException {
+        String path = request.getSession().getServletContext().getRealPath("/WEB-INF/file");
+        path += "/" + user.getAccount() + "/" + courseId;
+        File dir = new File(path);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        return FileUtil.uploadFile(files, path);
     }
 
 }

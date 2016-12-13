@@ -5,7 +5,10 @@ import com.courseplatform.bean.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -76,9 +79,45 @@ public class MD5Util {
     public static void main(String[] args) {
         String str1 = "131544215" + "131544215" + "1";
         String str2 = "131544245" + "131544245" + "1";
+        String str3 = "131544200" + "131544200" + "0";
         System.out.println("str1 = " + getMD5(str1));
         System.out.println("str2 = " + getMD5(str2));
+        System.out.println("getMD5(str3) = " + getMD5(str3));
         // 131544215 : 5a66f14e226173b3eb135e65484f165f
         // 131544245 : 12c7e8ab44382d8158179ab386f1110c
     }
+
+    public static String getMD5(File file) throws IOException {
+        // 生成一个MD5摘要
+        MessageDigest messageDigest = null;
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+            // 计算MD5
+            messageDigest.update(Files.readAllBytes(file.toPath()));
+            // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
+            // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
+            return new BigInteger(1, messageDigest.digest()).toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            LOG.error("生成MD5错误", e.getMessage());
+        }
+        return "";
+    }
+
+    public static String getMD5(byte[] bytes) throws IOException {
+        // 生成一个MD5摘要
+        MessageDigest messageDigest = null;
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+            // 计算MD5
+            messageDigest.update(bytes);
+            // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
+            // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
+            return new BigInteger(1, messageDigest.digest()).toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            LOG.error("生成MD5错误", e.getMessage());
+        }
+        return "";
+    }
+
+
 }

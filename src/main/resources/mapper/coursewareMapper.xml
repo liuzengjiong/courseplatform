@@ -11,9 +11,17 @@
     </insert>
 
     <!--查询课程的课件文件 -->
-    <select id="selectByCourseIdAndTeacherAccount" resultType="com.courseplatform.bean.Courseware">
+    <select id="selectByCourseIdAndTeacherAccount" resultMap="courseware">
         SELECT *
         FROM courseware
         WHERE course_id = #{courseId} AND teacher_account = #{teacherAccount}
     </select>
+
+    <resultMap id="courseware" type="com.courseplatform.bean.Courseware">
+        <result column="courseware_id" property="coursewareId"/>
+        <result column="course_id" property="courseId"/>
+        <result column="courseware" property="courseware"/>
+        <result column="teacher_account" property="teacherAccount"/>
+    </resultMap>
+
 </mapper>

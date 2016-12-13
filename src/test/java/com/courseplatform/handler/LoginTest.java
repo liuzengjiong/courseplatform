@@ -45,7 +45,7 @@ public class LoginTest {
 
     @Test
     public void testLogin() throws Exception {
-        mockMvc.perform((post("/login").param("account", "131544215").param("password", "131544215").param("type", "1")))
+        mockMvc.perform((post("/login").param("account", "131544200").param("password", "131544200").param("type", "0")))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

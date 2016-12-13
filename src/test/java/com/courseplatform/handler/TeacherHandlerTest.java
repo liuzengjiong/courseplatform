@@ -62,9 +62,36 @@ public class TeacherHandlerTest {
         test(url,data);
     }
 
+    @Test
+    public void testGetCourses() throws Exception {
+        String url = "/teacher/getCourses";
+        testGet(url,new HashMap<>());
+    }
+
+    public void testGet(String url, Map<String, String> data) throws Exception {
+
+        // 13154400 9a047e8f07f11f917fa9f75812613c5c
+        Cookie cookie1 = new Cookie("account", "131544200");
+        Cookie cookie2 = new Cookie("userCode", "9a047e8f07f11f917fa9f75812613c5c");
+        // post
+        MockHttpServletRequestBuilder builder = get(url);
+        // 参数
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            builder.param(entry.getKey(), entry.getValue());
+        }
+        // cookie
+        builder.cookie(cookie1, cookie2);
+        // 请求
+        mockMvc.perform((builder))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
     public void test(String url, Map<String, String> data) throws Exception {
-        Cookie cookie1 = new Cookie("account", "131544215");
-        Cookie cookie2 = new Cookie("userCode", "5a66f14e226173b3eb135e65484f165f");
+
+        // 13154400 9a047e8f07f11f917fa9f75812613c5c
+        Cookie cookie1 = new Cookie("account", "131544200");
+        Cookie cookie2 = new Cookie("userCode", "9a047e8f07f11f917fa9f75812613c5c");
         // post
         MockHttpServletRequestBuilder builder = post(url);
         // 参数
@@ -80,3 +107,5 @@ public class TeacherHandlerTest {
     }
 
 }
+
+//{"code":"1","size":2,"list":[{"courseId":"xxx","courseName":"xxx"},{"courseId":"xxx","courseName":"xxx"}]}

@@ -49,7 +49,7 @@ public class LoginHandler {
                         @ApiParam(required = true, value = "用户账号") String account,
                         @ApiParam(required = true, value = "用户密码") String password,
                         @ApiParam(required = true, value = "用户类型") int type) {
-
+        LOG.info("LOGIN-data:[account:" + account + ",password:" + password + ",type:" + type + "]");
         String md5 = loginService.login(account, password, type);
         JSONObject jsonObject = new JSONObject();
         if (null != md5 && md5.length() > 0) {
