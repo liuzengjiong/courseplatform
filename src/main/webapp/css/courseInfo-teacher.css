@@ -48,3 +48,119 @@ ul{
     /*border: 1px solid red;*/
     top: 200px;
 }
+#fileslist li{
+    width: 800px;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px dotted #cccccc;
+}#fileslist strong{
+    font-size: 14px;
+     font-weight: normal;
+    margin-right: 50px;
+ }
+#fileslist em{
+    margin-right: 50px;
+}
+ #fileslist span{
+     font-size: 12px;
+     font-weight: bold;
+     cursor: pointer;
+ }
+ #fileslist span:hover{
+     color: red;
+ }
+#introduction , #mainInfo{
+    width: 800px;
+    text-indent: 2em;
+    line-height: 22px;
+    background-color: #79cfe6;
+    border-radius: 10px;
+}
+
+#commentList li {
+    position: relative;
+    background-color: #79cfe6;
+    width: 800px;
+    line-height: 30px;
+    text-indent: 2em;
+    margin-bottom: 10px;
+    border-radius: 10px 10px 0 0 ;
+}
+#commentList span{
+    width: 200px;
+    height: 50px;
+    position: relative;
+    left: 700px;
+}
+#footer{
+    position: absolute;
+    width: 980px;
+    height: 50px;
+    text-align: center;
+    line-height: 30px;
+    bottom: 0;
+}
+#wrap{
+    position: absolute;
+    top:0;
+    width: 1350px;
+    height: 700px;
+    background-color: rgba(173,173,173,0.5);
+    display: none;
+}
+#addPanel{
+    position: absolute;
+    top: 100px;
+    left: 400px;
+    width: 600px;
+    min-height: 400px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+#cancel{
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #79cfe6;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+}
+#addPanel input{
+    margin-bottom: 20px;
+}
+#addfile{
+    width: 50px;
+}
+#sure{
+    position: absolute;
+    right: 20px;
+    bottom: 0px;
+}
+#upload li{
+    border-bottom: 1px dotted #cccccc;
+}
+#upload strong{
+    height: 20px;
+    font-size: 12px;
+    font-weight: normal;
+}
+#upload span{
+    position: absolute;
+    height: 20px;
+    font-size: 12px;
+    right: 100px;
+    cursor: pointer;
+}
+#upload span:hover{
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+#upload em{
+    display: none;
+}
+

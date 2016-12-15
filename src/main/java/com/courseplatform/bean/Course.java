@@ -1,6 +1,7 @@
 package com.courseplatform.bean;
 
 import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ public class Course {
      *
      * @mbggenerated Fri Dec 09 17:24:58 CST 2016
      */
+    @ApiModelProperty
     private String courseId;
 
     /**
@@ -22,6 +24,7 @@ public class Course {
      *
      * @mbggenerated Fri Dec 09 17:24:58 CST 2016
      */
+    @ApiModelProperty
     private String courseName;
 
     /**

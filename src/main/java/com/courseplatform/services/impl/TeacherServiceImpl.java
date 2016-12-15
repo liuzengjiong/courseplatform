@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -65,12 +64,15 @@ public class TeacherServiceImpl implements TeacherService {
         List<Courseware> coursewares = new ArrayList<>();
         for (String filename : filenames) {
             String filepath = "/uploadFile/" + account + "/" + course.getCourseId() + filename;
+            LOG.info("filename:" + filename + ",filePath:" + filepath);
             Courseware courseware = new Courseware(IDFactory.newID(), teacherCourse.getCourseId(), teacherCourse.getTeacherAccount(), filename, filepath);
             coursewares.add(courseware);
+//            coursewareMapper.insert(courseware);
         }
         int k = coursewareMapper.insertCoursewares(coursewares);
-
-        return i + j + k == 2 + filenames.length;
+        LOG.info("i:" + i + ",j:" + j + ",k:" + k);
+//        LOG.info("i:" + i + ",j:" + j );
+        return i + j == 2 + filenames.length;
     }
 
 

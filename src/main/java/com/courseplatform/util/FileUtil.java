@@ -72,8 +72,9 @@ public class FileUtil {
 //                }
                 filepath = System.currentTimeMillis() + "-" + file.getOriginalFilename();
                 file1 = new File(path, filepath);
+            } else {
+                filepath = file.getOriginalFilename();
             }
-            filepath = path + "/" + file.getOriginalFilename();
             //这里不必处理IO流关闭的问题，因为FileUtils.copyInputStreamToFile()方法内部会自动把用到的IO流关掉，我是看它的源码才知道的
             FileUtils.copyInputStreamToFile(file.getInputStream(), file1);
         }

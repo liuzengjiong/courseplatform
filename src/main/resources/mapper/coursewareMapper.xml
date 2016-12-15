@@ -3,10 +3,10 @@
 <mapper namespace="com.courseplatform.dao.CoursewareMapper">
     <!--插入多个课件文件-->
     <insert id="insertCoursewares">
-        INSERT INTO courseware (courseware_id,course_id,teacher_account,courseware)
+        INSERT INTO courseware (courseware_id,course_id,teacher_account,courseware_name,file_path)
         VALUES
         <foreach collection="coursewares" item="courseware" separator=",">
-            (#{courseware.coursewareId},#{courseware.courseId},#{courseware.teacherAccount},#{courseware.courseware})
+            (#{courseware.coursewareId},#{courseware.courseId},#{courseware.teacherAccount},#{courseware.coursewareName},#{courseware.filePath})
         </foreach>
     </insert>
 

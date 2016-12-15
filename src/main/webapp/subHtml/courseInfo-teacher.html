@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>课程详细页面（教师）</title>
     <link rel="stylesheet" href="../css/courseInfo-teacher.css"/>
+    <script src="../js/courseInfo-teacher.js"></script>
+    <script src="../js/jquery.min.js"></script>
 </head>
 <body>
 <div id="container">
@@ -14,23 +16,66 @@
         </div>
     </div>
     <div id="content">
-        <h3>数据结构</h3>
-        <h5>课程简介：</h5>
+        <h2>数据结构</h2>
+        <h4>课程简介：</h4>
         <div id="introduction">
             随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点
             随便写点随便写点随便写点随便写点随便写点随便写点随便写点
         </div>
-        <h5>课程大纲：</h5>
+        <h4>课程大纲：</h4>
         <div id="mainInfo">
             随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点
             随便写点随便写点随便写点随便写点随便写点随便写点随便写点
         </div>
-        <h5>课件：<input type="button" id="add" value="添加"/><br/></h5>
+        <h4>课件：<input type="button" id="add" value="添加"/><br/></h4>
 
         <ul id="fileslist">
-            <li>什么鬼.pdf</li>
-            <li>鬼什么.swf</li>
+            <li>
+                <strong>什么鬼.pdf</strong><em>dkadlk-das-2da-3</em><span>删除</span>
+            </li>
+            <li>
+                <strong>什么鬼.pdf</strong><span>删除</span>
+            </li>
         </ul>
+        <div id="comment">
+            <h5>学生评论列表：</h5>
+            <ul id="commentList">
+                <li>
+                    <p>随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写随便写点随便写点
+                        随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写随便写点随便写点
+                    </p>
+                    <span>____陈创业</span>
+                </li>
+                <li>
+                    <p>随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写随便写点随便写点</p>
+                    <span>____陈创业</span>
+                </li>
+                <li>
+                <p>随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写随便写点随便写点</p>
+                <span>____陈创业</span>
+            </li>
+                <li>
+                <p>随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写随便写点随便写点</p>
+                <span>____陈创业</span>
+            </li>
+            </ul>
+        </div>
+    </div>
+    <div id="footer">
+        <p>Copyright © 2016 | 课程平台系统小团队</p>
+    </div>
+</div>
+<div id="wrap">
+    <div id="addPanel">
+        <span id="cancel">取消</span>
+        <form action="" id="form" name="form" method="post" enctype="multipart/form-data">
+            <div id="upload">
+                <!--上传课件：<input type="file" id="uploadFile" multiple/>-->
+                上传文件：<input type="button" id="addfile" value="添加"/><br/>
+                <ul id="uploadList"></ul>
+            </div>
+            <input type="button" id="sure" value="确定"/>
+        </form>
     </div>
 </div>
 </body>

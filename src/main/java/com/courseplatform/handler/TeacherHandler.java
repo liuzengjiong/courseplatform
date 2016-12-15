@@ -98,9 +98,9 @@ public class TeacherHandler {
      * @date 2016/12/10 23:03
      */
     @RequestMapping(value = "/addCourse", method = RequestMethod.POST)
-    @ApiOperation(value = "添加课程", response = ResponseCode.class, notes = "老师添加课程")
+    @ApiOperation(value = "添加课程", response = ResponseCode.class, notes = "老师添加课程", produces = "prodeuces是什么")
     public String addCourse(@ApiParam("课件文件") @RequestParam(value = "files", required = false) MultipartFile[] files,
-                            Course course) {
+                            @ApiParam("课程信息") Course course) {
         String courseJson = JSONObject.toJSONString(course);
         LOG.info("addCourse:" + course.toString());
 //        for (int i = 0; i < files.length; i++) {
@@ -119,6 +119,7 @@ public class TeacherHandler {
             // 上传失败
             jsonObject.put("code", "0");
         }
+        LOG.info("return :");
         return "redirect:/subHtml/teacherIndex.html";
     }
 
@@ -159,6 +160,7 @@ public class TeacherHandler {
      */
     @RequestMapping(value = "/getCourse", method = RequestMethod.GET)
     @ResponseBody
+    @ApiOperation(value = "获取课程详细信息", response = Course.class, nickname = "nickname")
     public String getCourse(String courseId) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code", "0");
@@ -253,7 +255,7 @@ public class TeacherHandler {
      * @author ye [15622797401@163.com]
      * @date 2016/12/12 12:45
      */
-    @RequestMapping(value = "/deleteCourseware", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deleteCourseware", method = RequestMethod.GET)
     @ResponseBody
     public String deleteCourseware(String cousewareId) {
         JSONObject jsonObject = new JSONObject();
@@ -284,6 +286,7 @@ public class TeacherHandler {
         if (!dir.exists()) {
             dir.mkdirs();
         }
+        LOG.info("uploadFiles--" + path);
         return FileUtil.uploadFile(files, path);
     }
 
