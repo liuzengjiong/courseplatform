@@ -2,66 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>课程详细页</title>
-    <style>
-        body, ul, li {
-            margin: 0;
-            padding: 0;
-        }
-        body{
-            background-color: aliceblue;
-        }
-        #container {
-            position: relative;
-            width: 980px;
-            height: 700px;
-            margin: 0px auto;
-            background-color: lavender;
-        }
-        #header {
-            position: absolute;
-            width: 980px;
-            height: 200px;
-            background: #79cfe6 url("../img/indexHead.png") no-repeat 0 -30px;
-        }
-
-        #header .user {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            width: 120px;
-            height: 30px;
-            padding-left: 40px;
-            /*border: 1px solid red;*/
-            text-align: center;
-            line-height: 30px;
-            background:  url("../img/login2.png") no-repeat;
-        }
-        #quit {
-            color: #f1f1f1;
-            cursor: pointer;
-        }
-        #quit:hover {
-            color: red;;
-        }
-        #content{
-            position: absolute;
-            top: 200px;
-            padding: 20px;
-        }
-        #comment{
-            position: absolute;
-            top: 400px;
-        }
-    </style>
-    <script>
-        window.onload = function () {
-            var oContent = document.getElementById('content');
-            var oComment = document.getElementById('comment');
-            //alert(oContent.offsetHeight)
-            oComment.style.top = oContent.offsetHeight+200+'px';
-        }
-    </script>
+    <title>课程详细页面（学生）</title>
+    <link rel="stylesheet" href="../css/detailed-course.css"/>
+    <script src="../js/detailed-course.js"></script>
+    <script src="../js/jquery.min.js"></script>
 </head>
 <body>
 <div id="container">
@@ -72,22 +16,60 @@
         </div>
     </div>
     <div id="content">
-        <h3>java</h3>
-        <h5>教师：XXX</h5>
-        <h6>课程简介：</h6>
-        <p>随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点
+        <h2>java</h2>
+        <h5>科任教师：<span id="teacherName">XXX</span></h5>
+        <h4>课程简介：</h4>
+        <div id="introduction">
+            随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点
             随便写点随便写点随便写点随便写点随便写点随便写点随便写点
-        </p>
-        <p>下载:</p>
-        <span>教学课件</span><span>教学大纲</span>
-    </div>
-    <div id="comment">
-        <h5>评论：</h5>
-        <ul>
+        </div>
+        <h4>课程大纲：</h4>
+        <div id="mainInfo">
+            随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点
+            随便写点随便写点随便写点随便写点随便写点随便写点随便写点
+        </div>
+        <h4>课件：</h4>
+
+        <ul id="fileslist">
             <li>
-                adadsdsad
+                <a href="javascript:;">课件1</a><em>课件ID</em>
+            </li>
+            <li>
+                <a href="javascript:;">课件2</a><em>课件ID</em>
             </li>
         </ul>
+        <span id="reportOL">试验报告在线编辑--></span>
+        <div id="comment">
+            <h5>评论列表：</h5>
+            <ul id="commentList">
+                <li>
+                    <p>随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写随便写点随便写点
+                        随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写随便写点随便写点
+                    </p>
+                    <span>____陈创业</span>
+                </li>
+                <li>
+                    <p>随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写随便写点随便写点</p>
+                    <span>____陈创业</span>
+                </li>
+                <li>
+                    <p>随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写随便写点随便写点</p>
+                    <span>____陈创业</span>
+                </li>
+                <li>
+                    <p>随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写点随便写随便写点随便写点</p>
+                    <span>____陈创业</span>
+                </li>
+            </ul>
+        </div>
+        <div id="writeComment">
+            <!--写评论-->
+            <textarea placeholder="输入你想说的话..."></textarea>
+            <input type="button" id="send" value="发送"/>
+        </div>
+    </div>
+    <div id="footer">
+        <p>Copyright © 2016 | 课程平台系统小团队</p>
     </div>
 </div>
 </body>

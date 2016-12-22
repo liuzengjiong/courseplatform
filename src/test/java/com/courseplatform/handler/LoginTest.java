@@ -56,6 +56,14 @@ public class LoginTest {
                 .andExpect(status().isOk())
                 .andDo(print());
     }
+
+    @Test
+    public void testJwxt() throws Exception {
+        mockMvc.perform((post("/jwxt/confirmTeach").param("number", "131544215").param("passwd", "131544215ccy")))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
 }
 
 

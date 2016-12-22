@@ -1,0 +1,119 @@
+body, ul, li {
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: aliceblue;
+}
+ul{
+    list-style:none;
+}
+#container {
+    position: relative;
+    width: 980px;
+    min-height: 700px;
+    margin: 0px auto;
+    background-color: lavender;
+}
+#header {
+    position: absolute;
+    width: 980px;
+    height: 200px;
+    background: #79cfe6 url("../img/indexHead.png") no-repeat 0 -30px;
+}
+
+#header .user {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 120px;
+    height: 30px;
+    padding-left: 40px;
+    /*border: 1px solid red;*/
+    text-align: center;
+    line-height: 30px;
+    background:  url("../img/login2.png") no-repeat;
+}
+#quit {
+    color: #f1f1f1;
+    cursor: pointer;
+}
+#quit:hover {
+    color: red;;
+}
+#content{
+    position: absolute;
+    top: 200px;
+    padding-left: 10px;
+    min-height: 400px;
+}
+#fileslist li{
+    width: 800px;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px dotted #cccccc;
+}#fileslist strong{
+     font-size: 14px;
+     font-weight: normal;
+     margin-right: 50px;
+ }
+#fileslist em{
+    margin-right: 50px;
+}
+#introduction , #mainInfo{
+    width: 800px;
+    text-indent: 2em;
+    line-height: 22px;
+    background-color: #79cfe6;
+    border-radius: 10px 10px 0 0;
+}
+#reportOL{
+    display: block;
+    width: 180px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 20px;
+    margin-top: 20px;
+    background-color: lightyellow;
+    cursor: pointer;
+}
+#reportOL:hover{
+    color: #ff0000;
+}
+#commentList li {
+    position: relative;
+    background-color: #79cfe6;
+    width: 800px;
+    line-height: 30px;
+    text-indent: 2em;
+    margin-bottom: 10px;
+    border-radius: 10px 10px 0 0 ;
+}
+#commentList span{
+    width: 200px;
+    height: 50px;
+    position: relative;
+    left: 700px;
+}
+#writeComment{
+    position: relative;
+    width: 800px;
+    height: 100px;
+    resize: none;
+}
+#writeComment textarea {
+    width: 790px;
+    height: 80px;
+}
+#send{
+    position: absolute;
+    right: 6px;
+ }
+#footer{
+    position: absolute;
+    width: 980px;
+    height: 50px;
+    text-align: center;
+    line-height: 30px;
+    bottom: 0;
+}

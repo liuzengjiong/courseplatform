@@ -118,10 +118,14 @@ public class StudentHandler {
     public String getCourse(String courseId) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code", "0");
+        LOG.info("[getCourse] courseId:" + courseId);
         if (null != user) {
-            Course course = studentService.getCourse(courseId);
+            Course course = studentService.getCourseByStudentAndCourseId(courseId, user.getAccount());
+            LOG.info(course.toString());
+            List<Courseware> coursewares = coursewareService.getCourseware(courseId, course.getTeacherAccount());
             if (null != course) {
                 jsonObject.put("code", "1");
+                jsonObject.put("coursewares", coursewares);
                 jsonObject.put("course", course);
             }
         }

@@ -37,6 +37,10 @@ public class StudentServiceImpl implements StudentService {
         return courseMapper.selectByPrimaryKey(courseId);
     }
 
+    public Course getCourseByStudentAndCourseId(String courseId, String studentAccount) {
+        return studentCourseMapper.selectCourseByStudentAndCourseId(courseId, studentAccount);
+    }
+
     @Override
     public List<Course> getCourses(String studentAccount) {
         return studentCourseMapper.selectCoursesByStudent(studentAccount);

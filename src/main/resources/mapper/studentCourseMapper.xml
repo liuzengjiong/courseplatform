@@ -14,6 +14,20 @@
         WHERE #{studentAccount} = sc.student_account
     </select>
 
+    <select id="selectCourseByStudentAndCourseId" resultMap="Course">
+        SELECT
+            c.course_id,
+            c.course_introduction,
+            c.course_name,
+            c.course_syllabus,
+            c.time,
+            u.name,
+            u.account
+        FROM student_course AS sc LEFT JOIN course AS c ON c.course_id = sc.course_id
+            LEFT JOIN user AS u ON sc.teacher_account = u.account
+        WHERE c.course_id = #{courseId} AND sc.student_account = #{studentAccount}
+    </select>
+
     <resultMap id="Course" type="com.courseplatform.bean.Course">
         <result column="course_id" property="courseId"/>
         <result column="course_name" property="courseName"/>

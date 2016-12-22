@@ -31,6 +31,7 @@ public class CoursewareServiceImpl implements CoursewareService {
         for (String filename : filenames) {
             String filepath = "/uploadFile/" + teacherAccount + "/" + courseId + "/" + filename;
             Courseware courseware = new Courseware(IDFactory.newID(), courseId, teacherAccount, filename, filepath);
+            coursewares.add(courseware);
         }
         return coursewareMapper.insertCoursewares(coursewares);
     }

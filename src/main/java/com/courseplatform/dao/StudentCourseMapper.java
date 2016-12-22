@@ -3,6 +3,7 @@ package com.courseplatform.dao;
 import com.courseplatform.bean.Course;
 import com.courseplatform.bean.StudentCourse;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Component;
 
@@ -63,5 +64,7 @@ public interface StudentCourseMapper {
      * @return
      */
     List<Course> selectCoursesByStudent(@Param("studentAccount") String studentAccount);
+
+    Course selectCourseByStudentAndCourseId(@Param("courseId") String courseId, @Param("studentAccount") String studentAccount);
 
 }

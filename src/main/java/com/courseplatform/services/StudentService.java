@@ -2,6 +2,7 @@ package com.courseplatform.services;
 
 import com.courseplatform.bean.Course;
 import com.courseplatform.bean.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -45,5 +46,13 @@ public interface StudentService {
      */
     @Transactional
     List<Course> getCourses(String studentAccount);
+
+    /**
+     *
+     * @param courseId
+     * @param studentAccount
+     * @return
+     */
+    Course getCourseByStudentAndCourseId(@Param("courseId") String courseId, @Param("studentAccount") String studentAccount);
 }
 

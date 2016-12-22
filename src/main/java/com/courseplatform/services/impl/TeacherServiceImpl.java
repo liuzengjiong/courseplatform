@@ -63,14 +63,16 @@ public class TeacherServiceImpl implements TeacherService {
         // 设置老师的课件
         List<Courseware> coursewares = new ArrayList<>();
         for (String filename : filenames) {
-            String filepath = "/uploadFile/" + account + "/" + course.getCourseId() + filename;
+            String filepath = "/uploadFile/" + account + "/" + course.getCourseId() + "/" + filename;
             LOG.info("filename:" + filename + ",filePath:" + filepath);
             Courseware courseware = new Courseware(IDFactory.newID(), teacherCourse.getCourseId(), teacherCourse.getTeacherAccount(), filename, filepath);
             coursewares.add(courseware);
 //            coursewareMapper.insert(courseware);
         }
-        int k = coursewareMapper.insertCoursewares(coursewares);
-        LOG.info("i:" + i + ",j:" + j + ",k:" + k);
+        if (null != filenames && filenames.length > 0) {
+            int k = coursewareMapper.insertCoursewares(coursewares);
+        }
+        LOG.info("i:" + i + ",j:" + j);
 //        LOG.info("i:" + i + ",j:" + j );
         return i + j == 2 + filenames.length;
     }

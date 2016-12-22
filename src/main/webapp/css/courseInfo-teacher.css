@@ -65,6 +65,7 @@ ul{
      font-size: 12px;
      font-weight: bold;
      cursor: pointer;
+     padding-left: 20px;
  }
  #fileslist span:hover{
      color: red;

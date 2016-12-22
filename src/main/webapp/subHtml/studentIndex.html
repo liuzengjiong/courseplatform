@@ -110,13 +110,14 @@
         }
     </style>
     <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
     <script>
         window.onload = function () {
             var oNav = document.getElementById('nav');
             var aLi = oNav.getElementsByTagName('li');
             var frame = document.getElementById('frame');
-
-            var iframeSrc = ['my_courses.html', 'teacherList.html','courses.html','about.html'];
+            var oUsername = document.getElementById('user');
+            var iframeSrc = ['my_courses.html', 'teacherList.html','about.html'];
 
             for(var i=0;i<iframeSrc.length;i++){
                 aLi[i].index = i;
@@ -124,6 +125,19 @@
                     frame.src = iframeSrc[this.index];
                 }
             }
+
+            $.ajax({
+                url: "/student/info",    //请求的url地址
+                dataType: "json",   //返回格式为json
+                async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                data: {},    //参数值
+                type: "GET",   //请求方式
+                success: function (data) {
+                    if(data.code === '1'){
+                        oUsername.innerHTML = data.user["name"];
+                    }
+                }
+            });
         }
     </script>
 </head>
@@ -140,7 +154,7 @@
                 <!--<li>我的课程</li>-->
                 <li>师资队伍</li>
                 <!--<li>课程简介</li>-->
-                <!--<li>关于</li>-->
+                <li>关于</li>
                 <li class="bg"></li>
             </ul>
         </div>
@@ -168,7 +182,7 @@
     frame.onload = function () {
         var win = frame.contentWindow,
             doc = win.document,
-            html = doc.documentElement,
+            html = doc.documentElement ,
             body = doc.body;
 
         // 获取高度

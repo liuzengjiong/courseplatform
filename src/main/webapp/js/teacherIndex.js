@@ -23,7 +23,7 @@ window.onload = function () {
 
     //刷新列表
     refleshList();
-    oContainer.style.height = 200+oContent.offsetHeight+50+'px';
+    //oContainer.style.height = 200+oContent.offsetHeight+50+'px';
 
     
     //添加操作
@@ -113,19 +113,19 @@ window.onload = function () {
                         li.appendChild(oEm);
                         li.appendChild(oSpan);
                         oUl.appendChild(li);
-                        //oEm.style.visibility="hidden";
+                        oEm.style.visibility="hidden";
+                        oContainer.style.height = 200+oContent.offsetHeight+50+'px';
                             //删除
                         oSpan.onclick = function () {
                             var _this = this;
-                            //var id = oEm.innerHTML;
-                            var id = this.siblings("p").first().innerHTML;
+                            var id = this.previousElementSibling.innerHTML;//获取上一个兄弟节点的内容
                             if (confirm('是否要删除这门课程？')) {
                                 $.ajax({
                                     url: "/teacher/deleteCourse",    //请求的url地址
                                     dataType: "json",   //返回格式为json
                                     async: true, //请求是否异步，默认为异步，这也是ajax重要特性
                                     data: {courseId: id},    //参数值
-                                    type: "DELETE",   //请求方式
+                                    type: "GET",   //请求方式
                                     success: function (data) {
                                         //请求成功时处理
                                         if (data.code === '1') {
@@ -139,7 +139,7 @@ window.onload = function () {
 
                         //跳转
                         oA.onclick = function () {
-                            var id = oEm.innerHTML;
+                            var id = this.nextElementSibling.innerHTML;
                             $.ajax({
                                 url: "/teacher/getCourse",    //请求的url地址
                                 dataType: "json",   //返回格式为json

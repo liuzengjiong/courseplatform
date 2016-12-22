@@ -11,7 +11,7 @@
 <div id="container">
     <div id="header">
         <div class="user">
-            <span id="user">陈创业</span>
+            <span id="user"></span>
             <span id="quit">退出</span>
         </div>
     </div>
@@ -30,12 +30,12 @@
         <h4>课件：<input type="button" id="add" value="添加"/><br/></h4>
 
         <ul id="fileslist">
-            <li>
+            <!--<li>
                 <strong>什么鬼.pdf</strong><em>dkadlk-das-2da-3</em><span>删除</span>
             </li>
             <li>
                 <strong>什么鬼.pdf</strong><span>删除</span>
-            </li>
+            </li>-->
         </ul>
         <div id="comment">
             <h5>学生评论列表：</h5>
@@ -68,7 +68,7 @@
 <div id="wrap">
     <div id="addPanel">
         <span id="cancel">取消</span>
-        <form action="" id="form" name="form" method="post" enctype="multipart/form-data">
+        <form action="/teacher/addCourseware" id="form" name="form" method="post" enctype="multipart/form-data">
             <div id="upload">
                 <!--上传课件：<input type="file" id="uploadFile" multiple/>-->
                 上传文件：<input type="button" id="addfile" value="添加"/><br/>

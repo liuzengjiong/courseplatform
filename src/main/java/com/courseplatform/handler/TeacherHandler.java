@@ -113,7 +113,11 @@ public class TeacherHandler {
             course.setCourseId(IDFactory.newID());
             // 设置时间
             course.setTime(new Date());
-            teacherService.addCourse(user.getAccount(), course, uploadFiles(files, course.getCourseId()));
+            if (null != files && files.length > 0) {
+                teacherService.addCourse(user.getAccount(), course, uploadFiles(files, course.getCourseId()));
+            } else {
+                teacherService.addCourse(user.getAccount(), course, new String[]{});
+            }
             jsonObject.put("code", "1");
         } catch (IOException e) {
             // 上传失败
@@ -210,16 +214,17 @@ public class TeacherHandler {
      * @date 2016/12/11 15:00
      */
     @RequestMapping(value = "/addCourseware", method = RequestMethod.POST)
-    @ResponseBody
-    public String uploadAddCourseware(@RequestParam MultipartFile[] files, String courseId) {
+    public String uploadAddCourseware(@RequestParam MultipartFile[] files, @RequestParam(value = "courseId", required = true) String courseId) {
         JSONObject jsonObject = new JSONObject();
         try {
-            coursewareService.addCoursewares(user.getAccount(), courseId, uploadFiles(files, courseId));
+            if (null != files && files.length > 0) {
+                coursewareService.addCoursewares(user.getAccount(), courseId, uploadFiles(files, courseId));
+            }
             jsonObject.put("code", "1");
         } catch (IOException e) {
             jsonObject.put("code", "0");
         }
-        return jsonObject.toString();
+        return "redirect:/subHtml/courseInfo-teacher.html?" + courseId;
     }
 
     /**
@@ -249,7 +254,7 @@ public class TeacherHandler {
     /**
      * 删除课件
      *
-     * @param cousewareId
+     * @param coursewareId
      *         课件ID
      * @return
      * @author ye [15622797401@163.com]
@@ -257,11 +262,12 @@ public class TeacherHandler {
      */
     @RequestMapping(value = "/deleteCourseware", method = RequestMethod.GET)
     @ResponseBody
-    public String deleteCourseware(String cousewareId) {
+    public String deleteCourseware(String coursewareId) {
+        LOG.info("deleteCourseware: coursewareId:" + coursewareId);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code", "0");
         if (null != user) {
-            int i = coursewareService.deleteCourseware(cousewareId);
+            int i = coursewareService.deleteCourseware(coursewareId);
             if (i == 1) {
                 jsonObject.put("code", "1");
             }
