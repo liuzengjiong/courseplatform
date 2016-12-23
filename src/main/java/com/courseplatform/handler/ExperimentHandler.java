@@ -226,6 +226,29 @@ public class ExperimentHandler {
     }
     
     /**
+     * 获取某课程学生的实验列表
+     *
+     * @return 课程列表
+     */
+    @RequestMapping(value = "/getExperimentsOfStudents", method = RequestMethod.GET)
+    @ResponseBody
+    public String getExperimentsOfStudents(String cloneId) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code", 0);
+        if (null != user) {
+            LOG.info("getCourses-user:" + user.getAccount());
+            List<Experiment> experiments = experimentService.getExperimentListOfStudents(cloneId);
+            jsonObject.put("code", "1");
+            jsonObject.put("size", experiments.size());
+            jsonObject.put("list", experiments);
+            jsonObject.put("username", user.getName());
+            LOG.info(jsonObject.toString());
+            System.out.println(jsonObject.toString());
+        }
+        return jsonObject.toJSONString();
+    }
+    
+    /**
      * 创建副本
      *
      * @return 课程列表

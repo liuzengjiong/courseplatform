@@ -167,8 +167,9 @@ public class ExperimentServiceImpl implements ExperimentService {
     }
 
     @Override
-    public Course getCourse(String courseId, String account) {
-        return courseMapper.selectByPrimaryKey(courseId);
+    public List<Experiment> getExperimentListOfStudents(String cloneId) {
+    	List<Experiment> list = experimentMapper.selectByCloneId(cloneId);
+        return list;
     }
 
     @Override

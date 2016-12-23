@@ -205,4 +205,24 @@ public interface ExperimentMapper {
         @Result(column="clone_id", property="cloneId", jdbcType=JdbcType.VARCHAR)
     })
     List<Experiment> selectByCourseId(String courseId);
+    @Select({
+        "select",
+        "id, experiment_name, course_id, file_url, update_time, user_account, deadline, ",
+        "state, ps, clone_id",
+        "from experiment",
+        "where clone_id = #{cloneId,jdbcType=VARCHAR}"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
+        @Result(column="experiment_name", property="experimentName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="course_id", property="courseId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="file_url", property="fileUrl", jdbcType=JdbcType.VARCHAR),
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="user_account", property="userAccount", jdbcType=JdbcType.VARCHAR),
+        @Result(column="deadline", property="deadline", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="state", property="state", jdbcType=JdbcType.INTEGER),
+        @Result(column="ps", property="ps", jdbcType=JdbcType.VARCHAR),
+        @Result(column="clone_id", property="cloneId", jdbcType=JdbcType.VARCHAR)
+    })
+    List<Experiment> selectByCloneId(String cloneId);
 }

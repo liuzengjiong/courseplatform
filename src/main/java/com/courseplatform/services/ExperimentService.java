@@ -49,7 +49,7 @@ public interface ExperimentService {
      * @return
      */
     @Transactional
-    Course getCourse(String courseId, String account);
+    List<Experiment> getExperimentListOfStudents(String cloneId);
 
     /**
      * 删除老师的课程

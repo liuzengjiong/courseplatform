@@ -35,13 +35,13 @@ window.onload = function () {
   
     //课程信息
     var href = window.location.href;
-    var courseId = href.substring(href.indexOf('?')+1,href.index);//课程ID
-    var student = false;
-    if(href.indexOf("&")!=-1){
-    	courseId = courseId.substring(0, courseId.indexOf("&"));
-    	oAdd.hidden = true;
-    	student = true;
-    }
+    var id = href.substring(href.indexOf('?')+1,href.index);//课程ID
+   // var student = false;
+//    if(href.indexOf("&")!=-1){
+//    	courseId = courseId.substring(0, courseId.indexOf("&"));
+//    	oAdd.hidden = true;
+//    	student = true;
+//    }
     
     //刷新列表
     refleshList();
@@ -124,37 +124,16 @@ window.onload = function () {
             
 
     }
-    function getFileUrl(id){
-    	  var result;
-    	  $.ajax({
-              url: getContextPath()+"/experiment/createCopyment",    //请求的url地址
-              dataType: "json",   //返回格式为json
-              async: false, //请求是否异步，默认为异步，这也是ajax重要特性
-              data: {"id":id},    //参数值
-              type: "GET",   //请求方式
-              beforeSend: function () {
-                  //请求前的处理
-              },
-              success: function (data) {
-            	  if(data.code==1){
-            		  result = data.path;
-            		 // alert(data.path);
-            	  }else{
-            		  alert("未能创建文件副本");
-            	  }
-              }
-    	  });
-    	  
-    	  return result;
-    }
+    
+    
     
     function refleshList() {
         //JQuery ajax()请求数据
         $.ajax({
-            url: getContextPath()+"/experiment/getExperiments",    //请求的url地址
+            url: getContextPath()+"/experiment/getExperimentsOfStudents",    //请求的url地址
             dataType: "json",   //返回格式为json
             async: true, //请求是否异步，默认为异步，这也是ajax重要特性
-            data: {"courseId":courseId},    //参数值
+            data: {"cloneId":id},    //参数值
             type: "GET",   //请求方式
             beforeSend: function () {
                 //请求前的处理
@@ -166,25 +145,22 @@ window.onload = function () {
                     oUl.innerHTML = '';//清除列表
                     oUser.innerHTML = data.username;
                     if(data.size==0){
-                    	alert("目前还没有实验报告");
+                    	alert("目前还没有人交");
                     }
                     for (var i = 0; i < data.size; i++) {
                         var li = document.createElement('li');
                         var oA = document.createElement('a');//课程名
                         var oEm = document.createElement('em');//存放courseID
 
-                        var oSpan = document.createElement('span');//查看作业情况
-                        var intener = document.createElement('a');
-                        intener.innerHTML = '批改';
-                        intener.href= getContextPath()+"/exp/course-experiment-list.html?"+data.list[i].id;
-                        intener.target="blank";
-                        if(student){
+                       // var oSpan = document.createElement('span');//查看作业情况
+                        //oSpan.innerHTML = '批改';
+                        /*if(student){
                         	oSpan.hidden = true;
-                        }
-                        oA.innerHTML = data.list[i].experimentName;
+                        }*/
+                        oA.innerHTML = "学号："+data.list[i].userAccount;
                         oEm.innerHTML = data.list[i].id;
                         
-                        var fileUrl = getFileUrl(data.list[i].id)//data.list[i].fileUrl;
+                        var fileUrl = data.list[i].fileUrl;//data.list[i].fileUrl;
                         fileUrl=encodeURI(fileUrl); 
                         fileUrl=encodeURI(fileUrl); 
                         var url=getContextPath()+"/editfile.jsp?fileId="+fileUrl;
@@ -193,19 +169,31 @@ window.onload = function () {
                         oA.target = "blank";
                         li.appendChild(oA);
                         li.appendChild(oEm);
-                        li.appendChild(oSpan);
-                        oSpan.appendChild(intener)
+                        //li.appendChild(oSpan);
                         oUl.appendChild(li);
                         oEm.style.visibility="hidden";
                         oContainer.style.height = 200+oContent.offsetHeight+50+'px';
                             //查看
-//                        oSpan.onclick = function () {
-//                            var _this = this;
-//                            
-//                            //var id = this.previousElementSibling.innerHTML;//获取上一个兄弟节点的内容
-//                            window.location.href=
-//                            
-//                        }
+                        oSpan.onclick = function () {
+                            var _this = this;
+                            var id = this.previousElementSibling.innerHTML;//获取上一个兄弟节点的内容
+                           
+                                $.ajax({
+                                    url: getContextPath()+"/teacher/deleteCourse",    //请求的url地址
+                                    dataType: "json",   //返回格式为json
+                                    async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                                    data: {courseId: id},    //参数值
+                                    type: "GET",   //请求方式
+                                    success: function (data) {
+                                        //请求成功时处理
+                                        if (data.code === '1') {
+                                            //oUl.removeChild(_this.parentNode);
+                                            refleshList();
+                                        }
+                                    }
+                                });
+                            
+                        }
 
                         //跳转
                         oA.onclick = function () {
