@@ -56,7 +56,25 @@ public interface StudentCourseMapper {
             @Result(column = "student_account", property = "studentAccount", jdbcType = JdbcType.VARCHAR, id = true)
     })
     List<StudentCourse> selectAll();
-
+    
+    /**
+     * TODO:查找某一课程下的所有学生
+     * 2016年12月23日01:33:32
+     * Jiong
+     */
+    @Select({
+	        "select",
+	        "course_id, teacher_account, student_account",
+	        "from student_course",
+	        "where course_id = #{courseId,jdbcType=VARCHAR}"
+	})
+	@Results({
+	        @Result(column = "course_id", property = "courseId", jdbcType = JdbcType.VARCHAR, id = true),
+	        @Result(column = "teacher_account", property = "teacherAccount", jdbcType = JdbcType.VARCHAR, id = true),
+	        @Result(column = "student_account", property = "studentAccount", jdbcType = JdbcType.VARCHAR, id = true)
+	})
+	List<StudentCourse> selectByCourseId(String courseId);
+    
     /**
      * 查找学生的所有课程
      *

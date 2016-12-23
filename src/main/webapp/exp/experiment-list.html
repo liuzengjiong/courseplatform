@@ -1,0 +1,61 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>实验报告列表</title>
+     <link href="../css/teacherIndex.css" rel="stylesheet" type="text/css"/>
+    <script src="../js/experiment-list.js"></script>
+    <script src="../js/jquery.min.js"></script>
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="user">
+            <span id="user"></span>
+            <span id="quit">退出</span>
+        </div>
+    </div>
+    <div id="content">
+        <p>实验列表：</p>
+        <span id="add">添加</span>
+        <ul id="list">
+            <!--<li><a href="javascript:;">java</a><em>123</em><span>删除</span></li>-->
+            <!--<li><a href="javascript:;">数据库</a><em>123</em><span>删除</span></li>-->
+            <!--<li><a href="javascript:;">flash</a><em>465</em><span>删除</span></li>-->
+            <!--<li><a href="javascript:;">数据结构</a><em>123</em><span>删除</span></li>-->
+        </ul>
+    </div>
+    <div id="footer">
+        <p>Copyright © 2016 | 课程平台系统小团队</p>
+    </div>
+</div>
+<div id="wrap">
+    <div id="addPanel">
+        <span id="cancel">取消</span>
+        <form action="/teacher/addCourse" id="form" name="form" method="post" enctype="multipart/form-data">
+            实验名称：<input type="text" id="courseName" name="experimentName"/><br/>
+            <!--教师姓名：<input type="text" id="teachername" name="teachername"/><br/>-->
+            <div id="upload">
+            上传文件：<input type="file" name="files" id='file'/> 
+                <!--上传课件：<input type="file" id="uploadFile" multiple/>-->
+             <!--    上传文件：<input type="button" id="addfile" value="添加"/><br/>
+                <ul>
+                    <li>
+                         <strong>课件名</strong><span>×</span>
+                     </li>
+                     <li>
+                         <strong>课件名</strong><span>×</span>
+                     </li>
+                     <li>
+                         <strong>课件名</strong><span>×</span>
+                     </li>
+                     <li>
+                         <strong>课件名</strong><span>×</span>
+                     </li>
+                </ul> -->
+            </div>
+            <input type="button" id="sure" value="确定"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,6 +1,12 @@
 /**
  * Created by yangxiangtian on 2016/12/13.
  */
+function getContextPath(){   
+    var pathName = document.location.pathname;   
+    var index = pathName.substr(1).indexOf("/");   
+    var result = pathName.substr(0,index+1);   
+    return result;   
+} 
 window.onload = function () {
     var oContainer = document.getElementById('container');
     var oContent = document.getElementById('content');
@@ -20,7 +26,7 @@ window.onload = function () {
     // 请求数据
     //学生信息
     $.ajax({
-        url: "/student/info",    //请求的url地址
+        url: getContextPath()+"/student/info",    //请求的url地址
         dataType: "json",   //返回格式为json
         async: true, //请求是否异步，默认为异步，这也是ajax重要特性
         data: { },    //参数值
@@ -38,7 +44,8 @@ window.onload = function () {
 
     //在线编辑转接
     oReportOL.onclick = function () {
-        alert("转到报告在线编辑");
+        //alert("转到报告在线编辑");
+    	window.location.href = getContextPath()+"/exp/experiment-list.html?"+courseId+"&student";
     }
     //发送评论
     oSend.onclick = function () {
@@ -47,7 +54,7 @@ window.onload = function () {
     function refleshCourse() {
 
         $.ajax({
-            url: "/student/getCourse",    //请求的url地址
+            url: getContextPath()+"/student/getCourse",    //请求的url地址
             dataType: "json",   //返回格式为json
             async: true, //请求是否异步，默认为异步，这也是ajax重要特性
             data: {courseId: courseId},    //参数值

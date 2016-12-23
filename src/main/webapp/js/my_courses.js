@@ -1,12 +1,18 @@
 /**
  * Created by yangxiangtian on 2016/12/13.
  */
+function getContextPath(){   
+    var pathName = document.location.pathname;   
+    var index = pathName.substr(1).indexOf("/");   
+    var result = pathName.substr(0,index+1);   
+    return result;   
+} 
 window.onload = function () {
     var oCourseList = document.getElementById('list');
 
     //获取列表
     $.ajax({
-        url: "/student/getCourses",    //请求的url地址
+        url: getContextPath()+"/student/getCourses",    //请求的url地址
         dataType: "json",   //返回格式为json
         async: true, //请求是否异步，默认为异步，这也是ajax重要特性
         data: {},    //参数值
@@ -44,7 +50,7 @@ window.onload = function () {
                     oA.onclick = function () {
                         var id = this.nextElementSibling.innerHTML;
                         $.ajax({
-                            url: "/student/getCourse",    //请求的url地址
+                            url: getContextPath()+"/student/getCourse",    //请求的url地址
                             dataType: "json",   //返回格式为json
                             async: true, //请求是否异步，默认为异步，这也是ajax重要特性
                             data: {courseId: id},    //参数值

@@ -1,11 +1,18 @@
 /**yangxiangtian
  * Created by Administrator on 2016/12/12.
  */
+function getContextPath(){   
+    var pathName = document.location.pathname;   
+    var index = pathName.substr(1).indexOf("/");   
+    var result = pathName.substr(0,index+1);   
+    return result;   
+}  
+
 var oUl = $('#list');
 $(function () {
 //JQuery ajax()请求数据
     $.ajax({
-        url: "/student/getCourses",    //请求的url地址
+        url: getContextPath()+"/student/getCourses",    //请求的url地址
         dataType: "json",   //返回格式为json
         async: true, //请求是否异步，默认为异步，这也是ajax重要特性
         data: {},    //参数值

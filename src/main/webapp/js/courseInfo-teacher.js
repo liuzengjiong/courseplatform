@@ -1,6 +1,13 @@
 /**
  * Created by yangxiangtian on 2016/12/13.
  */
+
+function getContextPath(){   
+    var pathName = document.location.pathname;   
+    var index = pathName.substr(1).indexOf("/");   
+    var result = pathName.substr(0,index+1);   
+    return result;   
+}  
 window.onload = function () {
     var oContainer = document.getElementById('container');
     var oContent = document.getElementById('content');
@@ -23,7 +30,7 @@ window.onload = function () {
     //请求数据
     //教师信息
     $.ajax({
-        url: "/teacher/info",    //请求的url地址
+        url: getContextPath()+"/teacher/info",    //请求的url地址
         dataType: "json",   //返回格式为json
         async: true, //请求是否异步，默认为异步，这也是ajax重要特性
         data: { },    //参数值
@@ -86,6 +93,7 @@ window.onload = function () {
             //oLi.style.visibility="hidden";
             oLi.display = 'none';
             //提交
+            document.getElementById('form').action = getContextPath()+"/teacher/addCourseware";
             document.getElementById('form').submit();
             //刷新课程信息
             refleshCourse();
@@ -98,7 +106,7 @@ window.onload = function () {
 function refleshCourse() {
 
     $.ajax({
-        url: "/teacher/getCourse",    //请求的url地址
+        url: getContextPath()+"/teacher/getCourse",    //请求的url地址
         dataType: "json",   //返回格式为json
         async: true, //请求是否异步，默认为异步，这也是ajax重要特性
         data: { courseId: courseId},    //参数值
@@ -109,6 +117,12 @@ function refleshCourse() {
                 oCourseName.innerHTML = data.course["courseName"];
                 oIntroduction.innerHTML = data.course["courseIntroduction"];
                 oMainInfo.innerHTML = data.course["courseSyllabus"];
+                var oExp = document.createElement('a');
+                oExp.innerHTML = "  ( 实验报告  )";
+                oExp.href = getContextPath()+"/exp/experiment-list.html?"+courseId;
+                oExp.target = 'blank';
+                oCourseName.appendChild(oExp);
+                
                 var courseware = data.coursewares;
                 //清空课件列表
                 fileList.innerHTML = '';
@@ -136,7 +150,7 @@ function refleshCourse() {
                         var coursewareId = this.previousElementSibling.innerHTML;
                         if (confirm('是否要删除这个课件？')) {
                             $.ajax({
-                                url: "/teacher/deleteCourseware",    //请求的url地址
+                                url: getContextPath()+"/teacher/deleteCourseware",    //请求的url地址
                                 dataType: "json",   //返回格式为json
                                 async: true, //请求是否异步，默认为异步，这也是ajax重要特性
                                 data: {coursewareId: coursewareId},    //参数值
